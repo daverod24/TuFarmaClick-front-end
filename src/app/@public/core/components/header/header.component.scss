@@ -1,0 +1,38 @@
+* {
+  color: #0a4e8a;
+}
+
+.logotype {
+  width: 25%;
+  text-align: left;
+  margin: 5px 0 5px 10px;
+}
+
+p,
+a {
+  position: relative;
+}
+
+p {
+  top: 25%;
+}
+
+a {
+  top: 14%;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.faq {
+  margin-top: 10px;
+}
+
+.delivery {
+  position: relative;
+  top: 32%;
+}
+.custom-bg {
+  background-color: #398adb;
+}
