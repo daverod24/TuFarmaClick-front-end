@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PublicComponent } from './public.component';
+import { LoginModule } from './forms/login/login.module';
+import { RegisterModule } from './forms/register/register.module';
 
 const routes: Routes = [
   {
@@ -14,6 +16,14 @@ const routes: Routes = [
       {
         path: 'contact',
         loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule)
+      },
+      {
+        path: 'login',
+        loadChildren: () => import('./forms/login/login.module').then(m => m.LoginModule)
+      },
+      {
+        path: 'register',
+        loadChildren: () => import('./forms/register/register.module').then(m => m.RegisterModule)
       },
     ]
   }
