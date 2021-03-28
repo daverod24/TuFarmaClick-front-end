@@ -1,10 +1,11 @@
 * {
-  color: #0a4e8a;
+  /*color: #0a4e8a;*/
+  color: white;
 }
 
 .logotype {
-  width: 25%;
-  text-align: left;
+  width: 55%;
+  text-align: center;
   margin: 5px 0 5px 10px;
 }
 
@@ -32,6 +33,8 @@ a:hover {
 .delivery {
   position: relative;
   top: 32%;
+  font-weight: bold;
+  font-size: x-large;
 }
 .custom-bg {
   background-color: #398adb;
