@@ -2,43 +2,43 @@
     <div class="row">
       <div class="col-lg"></div>
       <div class="col-lg-6">
-        <form>
+        <form [formGroup]="miFormulario" (ngSubmit)="login()">
           <h1>Iniciar sesión</h1>
           <hr />
           <label for="email"><b>Correo electrónico</b></label>
           <input
             type="email"
-            placeholder="Introduzca la correo electrónico"
-            name="email"
+            placeholder="Introduzca su correo electrónico"
             class="form-control"
+            formControlName="email"
             required
           />
-          <div class="alert alert-danger" >
-            <div >
-              Introduzca un correo electrónico válido por favor
-            </div>
+          <div class="alert alert-danger" *ngIf="campoNoValido('email')">
             <div>
-              El correo electrónico no sigue el formato correcto. Sigue este ejemplo: anartz@mugika.com
+              {{ emailErrorMsg }}
             </div>
+       
           </div>
-
+        
           <label for="psw"><b>Contraseña</b></label>
           <input
             type="password"
             placeholder="Introduzca la contraseña"
-            name="password"
+            formControlName="password"
             class="form-control"
             required
           />
-          <div class="alert alert-danger">
-            <div >
-              Introduzca una contraseña por favor
+         
+            <div class="alert alert-danger" *ngIf="campoNoValido('password')">
+              <div>
+                Introduzca una contraseña por favor
+              </div>
             </div>
-          </div>
+        
 
           <div class="row">
             <div class="col-lg">
-              <button type="submit" class="signup-btn">Iniciar sesión</button>
+              <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Iniciar sesión</button>
             </div>
           </div>
           <div class="more-options">

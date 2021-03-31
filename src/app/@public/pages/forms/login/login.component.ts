@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { EmailValidatorService } from '../validators/services/email-validator.service';
+import { ValidatorService } from '../validators/services/validator.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -9,14 +13,50 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  login= {
-    email: '',
-    password: ''
-  };
+  miFormulario:  FormGroup = this.fb.group({
+    email: ['test@gmail.com', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ] ],
+    password: ['123456', [ Validators.required, Validators.minLength(6) ]]
+  })
+
+  get emailErrorMsg(): string {
+    
+    const errors = this.miFormulario.get('email')?.errors;
+    if ( errors?.required ) {
+      return 'Email es obligatorio';
+    } else if ( errors?.pattern ) {
+      return 'El valor ingresado no tiene formato de correo';
+    } 
+  }
  
-  constructor(private router: Router) { }
+  constructor(  private router: Router, 
+                private fb: FormBuilder, 
+                private validatorService: ValidatorService,
+                private authService: AuthService)  { }
 
   ngOnInit(): void {
+  }
+
+  //Validaciones campos de formularios
+  campoNoValido( campo: string ) {
+    return this.miFormulario.get(campo)?.invalid
+            && this.miFormulario.get(campo)?.touched;
+  }
+
+  //Inicio de sesión 
+  login(){
+    // console.log(this.miFormulario.valid);
+    const { email, password } = this.miFormulario.value;
+
+    this.authService.login( email, password )
+      .subscribe( ok => {
+
+        console.log(ok);
+        if ( ok === true ) {
+          this.router.navigateByUrl('/');
+        } else {
+          Swal.fire('Error', ok, 'error');
+        }
+      });
   }
 
 }

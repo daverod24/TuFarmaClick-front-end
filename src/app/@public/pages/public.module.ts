@@ -13,6 +13,7 @@ import { FooterComponent } from '../core/components/footer/footer.component';
     CommonModule,
     PublicRoutingModule,
     
+    
   ]
 })
 export class PublicModule { }
