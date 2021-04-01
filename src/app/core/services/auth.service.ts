@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/login.interface';
@@ -23,6 +23,11 @@ export class AuthService {
     return { ...this._usuario };
   }
 
+
+  updateSession(newValue: any) {
+    this.accessVar.next(newValue);
+  }
+
   constructor( private http: HttpClient ) { }
 
   //Registro de usuario
@@ -31,21 +36,16 @@ export class AuthService {
     const url  = `${ this.baseUrl }usuarios`;
     const body = { email, password, nombre, apellido, rol };
 
-
-    console.log(body);
-
     return this.http.post<AuthResponse>( url, body )
       .pipe(
         tap( ({ ok, token }) => {
           if ( ok ) {
             localStorage.setItem('token', token! );
-            
           }
         }),
         map( resp => resp.ok ),
         catchError( err => of(err.error.msg) )
         );
-      
 
   }
 
@@ -61,8 +61,14 @@ export class AuthService {
         tap( resp => {
           console.log(resp);
           if ( resp.ok ) {
-            localStorage.setItem('token', resp.token! );
-            localStorage.setItem('usuario', resp.usuario.nombre! );
+
+            
+            this.updateSession(resp);
+
+
+            localStorage.setItem('token', JSON.stringify(resp.token! ));
+            localStorage.setItem('usuario',JSON.stringify( resp.usuario ));
+      
           }
         }),
         map( resp => resp.ok ),
@@ -75,6 +81,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    this.updateSession(null);
   }
 
 
