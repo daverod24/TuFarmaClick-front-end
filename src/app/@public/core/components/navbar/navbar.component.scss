@@ -19,9 +19,16 @@
   left: -2px;
   border-radius: 10px;
 }
+
 .boton {
-  background: beige;
+  color: #fff;
+  font-size: 25px;
 }
-.navbar-toggler-icon {
-  background-color: #398adb;
+
+.link {
+  color: #398adb;
+}
+
+.link:hover {
+  color: #db8a39;
 }
