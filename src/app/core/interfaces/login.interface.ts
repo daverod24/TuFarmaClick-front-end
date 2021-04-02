@@ -1,22 +1,30 @@
 import { AdminComponent } from "src/app/@admin/pages/admin.component";
 
-
-export interface AuthResponse {
-    ok: boolean;
-    uid?: string;
-    nombre?: string;
-    email?: string;
-    token?: string;
-    msg?: string;
-}
-
 export interface Usuario {
-    uid: string;
+    uid?: string;
     nombre: string;
-    apellido: string;
+    apellido?: string;
     email: string;
-    password: string;
+    password?: string;
     role?: string;
+    ok?:      boolean;
 }
+
+export interface AuthResponse  {
+    ok:      boolean;
+    usuario: UsuarioClass;
+    token:   string;
+}
+
+export interface UsuarioClass {
+    rol:      string;
+    estado:   boolean;
+    google:   boolean;
+    nombre:   string;
+    apellido: string;
+    email:    string;
+    uid:      string;
+}
+
 
 

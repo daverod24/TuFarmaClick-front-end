@@ -49,4 +49,10 @@ this.userLabel = this.asignarUserLabel();
   logout() {
     this.auth.logout();
   }
+
+  renovarToken() {
+    this.auth.actualizarToken().subscribe(resp => {
+      
+    });
+  }
 }

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.authService.login( email, password )
       .subscribe( ok => {
 
-        console.log(ok);
+        // console.log(ok);
         if ( ok === true ) {
           this.router.navigateByUrl('/');
         } else {

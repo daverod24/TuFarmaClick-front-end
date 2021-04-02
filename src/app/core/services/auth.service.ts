@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { of, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/login.interface';
@@ -28,7 +29,7 @@ export class AuthService {
     this.accessVar.next(newValue);
   }
 
-  constructor( private http: HttpClient ) { }
+  constructor( private http: HttpClient, private router: Router ) { }
 
   //Registro de usuario
   registro( nombre: string, apellido: string, email: string, password: string, rol: string ="USER_ROLE" ) {
@@ -56,17 +57,15 @@ export class AuthService {
     const url  = `${ this.baseUrl }auth/login`;
     const body = { email, password };
 
-    return this.http.post<any>( url, body )
+    return this.http.post<AuthResponse>( url, body )
       .pipe(
         tap( resp => {
           console.log(resp);
           if ( resp.ok ) {
-
             
             this.updateSession(resp);
 
-
-            localStorage.setItem('token', JSON.stringify(resp.token! ));
+            localStorage.setItem('token',JSON.stringify(  resp.token! ));
             localStorage.setItem('usuario',JSON.stringify( resp.usuario ));
       
           }
@@ -76,8 +75,50 @@ export class AuthService {
       );
   }
 
+  //Validar sesión
+  sesionValida() {
+    this.accessVar$.subscribe((result) => {
+      if (result.rol == 'ADMIN_ROLE') {
+        return true;
+      
+      }else{
+        console.log('No eres admin')
+      }
 
-  
+    });
+    
+  }
+
+  actualizarToken(): Observable<boolean> {
+
+    const url = `${ this.baseUrl }auth/renew`;
+
+    const headers = new HttpHeaders()
+      .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.get<AuthResponse>( url, { headers } )
+        .pipe(
+          map( resp => {
+            localStorage.setItem('token', JSON.stringify( resp.token! ));
+            localStorage.setItem('usuario',JSON.stringify( resp.usuario ));
+
+
+            this._usuario = {
+              nombre: resp.usuario.nombre!,
+              uid: resp.usuario.uid!,
+              email: resp.usuario.email!
+            }
+
+
+            return  (resp.ok && resp.usuario.rol === 'ADMIN_ROLE');
+          }),
+          catchError( err => of(false) )
+        );
+
+  }
+
+
+  //Cerrar sesión
 
   logout() {
     localStorage.removeItem('token');
