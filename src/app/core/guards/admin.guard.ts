@@ -14,26 +14,26 @@ export class AdminGuard implements CanActivate, CanLoad {
     
   
     canActivate(): Observable<boolean> | boolean  {
-      return this.authService.actualizarToken()
+      return this.authService.validarUsuarioAdmin()
               .pipe(
                 tap( valid => {
                   console.log(valid)
                   if ( !valid ) {
-                    this.router.navigateByUrl('/admin');
+                    this.router.navigateByUrl('/login');
                   }
-                  return this.router.navigateByUrl('/home');
+          
                 })
               );
     }
   
     canLoad(): Observable<boolean> | boolean {
-      return this.authService.actualizarToken()
+      return this.authService.validarUsuarioAdmin()
         .pipe(
           tap( valid => {
             if ( !valid ) {
-              this.router.navigateByUrl('/admin');
-            }
-            return this.router.navigateByUrl('/home');
+              this.router.navigateByUrl('/login');
+            } 
+            
           })
         );
     }

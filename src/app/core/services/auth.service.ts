@@ -89,7 +89,7 @@ export class AuthService {
     
   }
 
-  actualizarToken(): Observable<boolean> {
+  actualizarToken(): Observable<any> {
 
     const url = `${ this.baseUrl }auth/renew`;
 
@@ -110,7 +110,33 @@ export class AuthService {
             }
 
 
-            return  (resp.ok && resp.usuario.rol === 'ADMIN_ROLE');
+            return  resp
+          }),
+          catchError( err => of(false) )
+        );
+
+  }
+
+
+  validarUsuarioAdmin(): Observable<any> {
+
+    const url = `${ this.baseUrl }auth/renew`;
+
+    const headers = new HttpHeaders()
+      .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.get<AuthResponse>( url, { headers } )
+        .pipe(
+          map( resp => {
+            localStorage.setItem('token', JSON.stringify( resp.token! ));
+            localStorage.setItem('usuario',JSON.stringify( resp.usuario ));
+            this._usuario = {
+              nombre: resp.usuario.nombre!,
+              uid: resp.usuario.uid!,
+              email: resp.usuario.email!
+            }
+
+            return  (resp.ok && resp.usuario.rol === 'ADMIN_ROLE')
           }),
           catchError( err => of(false) )
         );

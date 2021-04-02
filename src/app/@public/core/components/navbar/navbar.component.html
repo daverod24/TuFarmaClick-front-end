@@ -40,18 +40,9 @@
     </ul>
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
+      <li  *ngIf="role === 'ADMIN_ROLE'" class="nav-item">
 
-<button
-(click)= "renovarToken()"
->
-renovar token
-
-</button>
-
-      <li class="nav-item">
-
-
-        <a
+        <a 
           class="nav-link"
           [routerLink]="['/admin']"
           routerLinkActive="router-link-active"
@@ -59,10 +50,8 @@ renovar token
         >
 
 
-
-
       </li>
-      <li class="nav-item">
+      <li *ngIf="!userLabel" class="nav-item">
         <a
           class="nav-link"
           [routerLink]="['/login']"
@@ -70,7 +59,7 @@ renovar token
           >Login</a
         >
       </li>
-      <li class="nav-item" >
+      <li  *ngIf="!userLabel"  class="nav-item" >
         <a
           class="nav-link"
           [routerLink]="['/register']"

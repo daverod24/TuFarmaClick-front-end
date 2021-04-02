@@ -21,33 +21,35 @@ export class NavbarComponent implements OnInit {
       }
 
       this.userLabel = `${result.usuario!.nombre} ${result.usuario!.apellido}`;
+      this.role = result.usuario.rol;
+
     });
   }
 
   ngOnInit(): void {
-
-this.userLabel = this.asignarUserLabel();
+this.asignarVariablesNavBar();
 
   }
 
 
 
-  asignarUserLabel ( ) {
+  asignarVariablesNavBar ( ) {
 
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-    let userLabel;
 
     
     if (usuario) {
-      return userLabel = `${usuario.nombre} ${usuario.apellido}`;
-    } else {
-      return userLabel = '';
-    }
+      this.role = usuario.rol;
+
+      this.userLabel = `${usuario.nombre} ${usuario.apellido}`;
+    } 
 
   }
 
   logout() {
     this.auth.logout();
+    this.userLabel = undefined;
+    this.role = undefined;
   }
 
   renovarToken() {
