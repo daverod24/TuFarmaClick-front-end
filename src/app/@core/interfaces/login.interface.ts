@@ -1,4 +1,3 @@
-import { AdminComponent } from "src/app/@admin/pages/admin.component";
 
 export interface Usuario {
     uid?: string;

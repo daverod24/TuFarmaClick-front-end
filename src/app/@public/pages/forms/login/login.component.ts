@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
+import { AuthService } from 'src/app/@core/services/auth.service';
 import { EmailValidatorService } from '../validators/services/email-validator.service';
 import { ValidatorService } from '../validators/services/validator.service';
 import Swal from 'sweetalert2';
