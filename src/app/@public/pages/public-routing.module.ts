@@ -25,6 +25,20 @@ const routes: Routes = [
         path: 'register',
         loadChildren: () => import('./forms/register/register.module').then(m => m.RegisterModule)
       },
+      {
+        path: 'medicamentos',
+        loadChildren: () => import('./medicamentos/medicamentos.module').then(m => m.MedicamentosModule)
+      },
+      {
+        path: 'usuario',
+        loadChildren: () => import('./usuarios-premium/usuarios-premium.module').then(m => m.UsuariosPremiumModule)
+      },
+      {
+        path: 'blog',
+        loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
+      },
+      
+
     ]
   }
 ];

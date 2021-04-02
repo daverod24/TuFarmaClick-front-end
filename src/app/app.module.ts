@@ -1,5 +1,5 @@
 import { PublicModule } from './@public/pages/public.module';
-import { AdminModule } from './@admin/pages/admin.module';
+import { AdminModule } from './@admin/components/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
