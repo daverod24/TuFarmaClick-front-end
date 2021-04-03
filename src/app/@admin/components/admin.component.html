@@ -1,13 +1,81 @@
-<h1>Admin</h1>
-<ul>
-    <li>
-        <a [routerLink]="['/']" routerLinkActive="router-link-active"> Volver a Home</a> 
-    </li>
-    <li>
-        <a [routerLink]="['/admin']" routerLinkActive="router-link-active">Dashboard</a> 
-    </li>
-    <li>
-        <a [routerLink]="['/admin/users']" routerLinkActive="router-link-active">Users</a> 
-    </li>
-</ul>
-<router-outlet></router-outlet>
+<div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+
+    <div class="bg-light" id="sidebar-wrapper" mode="push" *ngIf="toggledValue" >
+        <div class="sidebar-heading color-letra"><h2 class="color-letra">TuFarmaClick</h2></div>
+        <div class="list-group list-group-flush custom-bg">
+          <a href="#" class="list-group-item list-group-item-action  bg-light color-letra">Dashboard</a>
+          <a  class="list-group-item list-group-item-action bg-light color-letra" [routerLink]="['users']" routerLinkActive="router-link-active">Users</a>
+          <a class="nav-link bg-light color-letra" [routerLink]="['/']" routerLinkActive="router-link-active">
+            Medicamentos
+          </a>
+          <a href="#" class="list-group-item list-group-item-action  bg-light color-letra">Categorías</a>
+          
+        </div>
+      </div>
+    <!-- Page Content -->
+    <div id="page-content-wrapper"  >
+    <nav class="navbar navbar-expand-lg custom-bg ">
+
+   
+
+        <button class="btn btn-primary mr-5" id="menu-toggle" (click)="toggled()" >
+            <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+        </button>
+        
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse ml" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0  ">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/']" routerLinkActive="router-link-active">Inicio</a>
+
+          </li>
+          
+          <li class="nav-item dropdown">
+            <a 
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown" 
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+        Usuario
+        </a>
+        <ul
+        class="dropdown-menu dropdown-menu-right"
+        aria-labelledby="navbarDropdown">
+        <a class="dropdown-item link" href="#">Perfil</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item link" (click)="logout()">Salir de la sesión</a>
+    </ul>
+          </li>
+          
+        </ul>
+       
+      </div>
+    
+
+
+    
+  </nav>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+        
+  </div>
+
+    </div>
+
+   
+
+</div>
+
+
+
+  
+ 

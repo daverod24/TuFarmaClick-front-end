@@ -37,6 +37,10 @@ const routes: Routes = [
         path: 'blog',
         loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
       },
+      {
+        path: 'resetearpsw',
+        loadChildren: () => import('./forms/resetear-psw/resetear-psw.module').then(m => m.ResetearPswModule)
+      },
       
 
     ]

@@ -2,8 +2,8 @@
     <div class="row">
       <div class="col-lg"></div>
       <div class="col-lg-6">
-        <form [formGroup]="miFormulario" (ngSubmit)="login()">
-          <h1>Iniciar sesión</h1>
+        <form [formGroup]="miFormulario">
+          <h1>Restablecer contraseña</h1>
           <hr />
           <label for="email"><b>Correo electrónico</b></label>
           <input
@@ -19,32 +19,14 @@
             </div>
        
           </div>
-        
-          <label for="psw"><b>Contraseña</b></label>
-          <input
-            type="password"
-            placeholder="Introduzca la contraseña"
-            formControlName="password"
-            class="form-control"
-            required
-          />
-         
-            <div class="alert alert-danger" *ngIf="campoNoValido('password')">
-              <div>
-                Introduzca una contraseña por favor
-              </div>
-            </div>
-        
-
+    
           <div class="row">
             <div class="col-lg">
-              <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Iniciar sesión</button>
+              <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Restablecer contraseña</button>
             </div>
           </div>
           <div class="more-options">
-            <p class="psw">
-               <a [routerLink]="['/resetearpsw']">¿Has olvidado la contraseña?</a>
-            </p>
+        
             <p class="psw">
               ¿No tienes cuenta? <a [routerLink]="['/register']">Ingresa aqui para registarte</a>
             </p>
