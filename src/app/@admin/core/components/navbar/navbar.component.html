@@ -10,47 +10,36 @@
           <a
             class="nav-link"
             [routerLink]="['/']"
-            routerLinkActive="router-link-active"
-            >Inicio</a
-          >
+            routerLinkActive="router-link-active">
+            <i class="fas fa-home fa-cog"></i>Inicio</a>
+
         </li>
         <li class="nav-item" >
           <a
             class="nav-link"
-            [routerLink]="['/']"
-            routerLinkActive="router-link-active"
-            >Medicamentos</a
-          >
+            [routerLink]="['medicamentos']"
+            routerLinkActive="router-link-active">
+            <i class="fas fa-plus fa-cog"></i> Medicamentos</a>
+
         </li>
+        <li class="nav-item" >
+          <a
+            class="nav-link"
+            [routerLink]="['categorias']"
+            routerLinkActive="router-link-active">
+            <i class="fas fa-tablets fa-cog"></i> Categorias</a>
+        </li>
+
          <li class="nav-item" >
           <a
             class="nav-link"
             [routerLink]="['users']"
-            routerLinkActive="router-link-active"
-            >Usuarios</a
-          >
+            routerLinkActive="router-link-active">
+             <i class="fas fa-users fa-cog "></i> Usuarios</a>
         </li>
        
       </ul>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-  
-       
-        <li *ngIf="!userLabel" class="nav-item">
-          <a
-            class="nav-link"
-            [routerLink]="['/login']"
-            routerLinkActive="router-link-active"
-            >Login</a
-          >
-        </li>
-        <li  *ngIf="!userLabel"  class="nav-item" >
-          <a
-            class="nav-link"
-            [routerLink]="['/register']"
-            routerLinkActive="router-link-active"
-            >Registro</a
-          >
-        </li>
         
         <li *ngIf="userLabel" class="nav-item dropdown">
           <a 
@@ -60,8 +49,7 @@
             role="button"
             data-bs-toggle="dropdown" 
             aria-haspopup="true"
-            aria-expanded="false"
-          >
+            aria-expanded="false">
           {{ userLabel }}
           </a>
           <ul
@@ -76,7 +64,7 @@
           <a
           class="nav-link"
             
-            ><i class="fas fa-shopping-cart"></i>
+            ><i class="fas fa-shopping-cart fa-cog"></i>
             <span class="badge badge-success notification">0</span></a
           >
         </li>

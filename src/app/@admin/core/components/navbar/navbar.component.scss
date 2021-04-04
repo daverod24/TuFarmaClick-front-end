@@ -13,6 +13,11 @@
   cursor: pointer;
 }
 
+.fa-cog:hover,
+ul li a:hover {
+  color: #398adb;
+}
+
 .badge.badge-success.notification {
   position: relative;
   top: -12px;

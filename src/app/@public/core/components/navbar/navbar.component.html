@@ -12,30 +12,31 @@
             class="nav-link"
             [routerLink]="['/']"
             routerLinkActive="router-link-active"
-            >Inicio</a
+            ><i class="fas fa-home fa-cog"></i> Inicio</a
           >
         </li>
         <li class="nav-item" >
           <a
             class="nav-link"
             [routerLink]="['/medicamentos']"
-            routerLinkActive="router-link-active"
-            >Medicamentos</a
-          >
+            routerLinkActive="router-link-active">
+            <i class="fas fa-plus fa-cog"></i> Medicamentos</a>
+
         </li> <li class="nav-item" >
           <a
             class="nav-link"
             [routerLink]="['/usuario']"
-            routerLinkActive="router-link-active"
-            >Usuario PREMIUM</a
-          >
+            routerLinkActive="router-link-active"> 
+            <i class="fas fa-user-plus fa-cog"></i> Usuario PREMIUM</a>
+            
         </li>
+
         <li class="nav-item" >
           <a
             class="nav-link"
             [routerLink]="['/blog']"
             routerLinkActive="router-link-active"
-            >TuFarmaBlog</a
+            > <i class="fas fa-notes-medical fa-cog"></i> TuFarmaBlog</a
           >
         </li>
       </ul>
@@ -46,9 +47,8 @@
           <a 
             class="nav-link"
             [routerLink]="['/admin']"
-            routerLinkActive="router-link-active"
-            >Admin</a
-          >
+            routerLinkActive="router-link-active">
+            <i class="fas fa-user-shield fa-cog"></i> Admin</a>
   
   
         </li>
@@ -57,7 +57,7 @@
             class="nav-link"
             [routerLink]="['/login']"
             routerLinkActive="router-link-active"
-            >Login</a
+            ><i class="fas fa-house-user fa-cog"></i> Login</a
           >
         </li>
         <li  *ngIf="!userLabel"  class="nav-item" >
@@ -65,13 +65,13 @@
             class="nav-link"
             [routerLink]="['/register']"
             routerLinkActive="router-link-active"
-            >Registro</a
+            ><i class="far fa-user-circle fa-cog"></i> Registro</a
           >
         </li>
         
         <li *ngIf="userLabel" class="nav-item dropdown">
           <a 
-            class="nav-link dropdown-togglnavbar-expand-lge"
+            class="nav-link dropdown-toggle"
             href="#"
             id="navbarDropdown"
             role="button"
@@ -90,12 +90,12 @@
             <a class="dropdown-item link" (click)="logout()">Salir de la sesión</a>
         </ul>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="userLabel">
           <a
           class="nav-link"
             
-            ><i class="fas fa-shopping-cart"></i>
-            <span class="badge badge-success notification">0</span></a
+            ><i class="fas fa-shopping-cart fa-cog"></i>
+            <span class="badge badge-success notification ">0</span></a
           >
         </li>
         
