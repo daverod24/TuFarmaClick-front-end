@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ListarComponent implements OnInit {
   titulo: String = 'Usuarios';
   usuarios: Usuario[];
+  page: number= 1;
 
   constructor(
     private usuariosService: UsuariosService,

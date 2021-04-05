@@ -2,6 +2,7 @@ import { PublicModule } from './@public/pages/public.module';
 import { AdminModule } from './@admin/components/admin.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,7 +19,9 @@ import { CoreModule } from './@core/core.module';
     PublicModule,
     CoreModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

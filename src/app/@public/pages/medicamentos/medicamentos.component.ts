@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicamentosComponent implements OnInit {
 
+  listadoMedicamentos = [
+    {nombre: 'Atamel', precio: 25},
+    {nombre: 'Cetirizina', precio: 25},
+    {nombre: 'Ibuprofeno', precio: 25},
+    {nombre: 'Diclofenac', precio: 25},
+    {nombre: 'Meloxican', precio: 25},
+    {nombre: 'Losartan', precio: 25},
+    {nombre: 'Furosemida', precio: 25},
+
+
+
+
+  ]
+
   constructor() { }
 
   ngOnInit(): void {

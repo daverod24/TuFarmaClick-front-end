@@ -4,13 +4,15 @@ import { CommonModule } from '@angular/common';
 import { UsersRoutingModule } from './users-routing.module';
 import { DetalleUsuarioComponent } from './pages/detalle-usuario/detalle-usuario.component';
 import { ListarComponent } from './pages/listar/listar.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 @NgModule({
   declarations: [DetalleUsuarioComponent, ListarComponent],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule, NgxPaginationModule
   ]
 })
 export class UsersModule { }

@@ -1,1 +1,25 @@
-<p>medicamentos works!</p>
+
+<div class="container">
+    <nav class="navbar">
+        <div class="container-fluid justify-content-end">
+          <form class="d-flex ">
+            <input class="form-control me-2" type="search" placeholder="Que medicamentos necesitas" aria-label="Search">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+          </form>
+        </div>
+      </nav>
+      
+      <div class="row">
+        <div class="col-sm-12 col-md-6  col-lg-4" *ngFor="let medicamentos of listadoMedicamentos">
+            <div class="card mb-3" style="width: 18rem;" >
+                <img src="./assets/imagenes/medicamentos/noimage.png" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{medicamentos.nombre}}</h5>
+                  <p class="card-text">Precio: {{medicamentos.precio}}</p>
+                  <a href="#" class="btn btn-primary">Agregar</a>
+                </div>
+              </div>
+      </div>
+    
+  
+</div>
