@@ -9,6 +9,8 @@
 
   </div>
 
+<div class="table-responsive table-responsive-sm table-responsive-md">
+
   <table class="table table-hover">
     <thead>
 
@@ -16,21 +18,24 @@
         <th scope="col">Nombre</th>
         <th scope="col">Email</th>
         <th scope="col">Rol</th>
+        <th scope="col"></th>
+
 
   
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuarios | paginate: {itemsPerPage: 2, currentPage: page}" >
+      <tr *ngFor="let usuario of usuarios | paginate: {itemsPerPage:5 , currentPage: page}" >
         <td>{{usuario.nombre}} {{usuario.apellido}}</td>
         <td>{{usuario.email}}</td>
         <td>{{usuario.rol}}</td>
-        <td style="width: 20%;" >
+        <td>
             
-            <button type="button" class="btn btn-danger btn-sm m-1" (click)="deleteUsuario(usuario.uid)">Eliminar</button>
-            <button type="button" class="btn btn-info btn-sm">Detalle</button>
-        
+            <button type="button" class="btn btn-danger btn-sm m-1" (click)="deleteUsuario(usuario.uid)"><i class="far fa-trash-alt icon"></i></button>
+            <button type="button" class="btn btn-info btn-sm"><i class="fas fa-info-circle icon"></i></button>
         </td>
+     
+
 
 
       </tr>
@@ -40,10 +45,15 @@
 
     </tbody>
   </table>
+</div>   
+
   
 </div>
-<pagination-controls (pageChange)="page = $event" autoHide="true"
+<div class="d-flex justify-content-center">
+  <pagination-controls (pageChange)="page = $event" autoHide="true"
   responsive="true"
   previousLabel="Anterior"
   nextLabel="Siguiente"></pagination-controls>
+</div>
+
 
