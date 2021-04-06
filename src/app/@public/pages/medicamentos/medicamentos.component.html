@@ -9,9 +9,10 @@
         </div>
       </nav>
       
-      <div class="row">
-        <div class="col-sm-12 col-md-6  col-lg-4" *ngFor="let medicamentos of listadoMedicamentos">
-            <div class="card mb-3" style="width: 18rem;" >
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-md-4 g-4">
+        <div class="col" *ngFor="let medicamentos of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
+            <div class="card mb-3 h-25"  >
                 <img src="./assets/imagenes/medicamentos/noimage.png" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{medicamentos.nombre}}</h5>
@@ -19,7 +20,16 @@
                   <a href="#" class="btn btn-primary">Agregar</a>
                 </div>
               </div>
-      </div>
+         </div>
+
+     </div>
+     <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="page = $event" autoHide="true"
+      responsive="true"
+      previousLabel="Anterior"
+      nextLabel="Siguiente"></pagination-controls>
+    </div>
     
   
 </div>
+
