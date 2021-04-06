@@ -57,10 +57,11 @@ export class AuthService {
     const url  = `${ this.baseUrl }auth/login`;
     const body = { email, password };
 
+    console.log(body);
+
     return this.http.post<AuthResponse>( url, body )
       .pipe(
         tap( resp => {
-          console.log(resp);
           if ( resp.ok ) {
             
             this.updateSession(resp);
