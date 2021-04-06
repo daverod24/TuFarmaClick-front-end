@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {  Producto} from 'src/app/@core/interfaces/productos.interface';
+import { ProductosService } from 'src/app/@core/services/productos.service';
 
 @Component({
   selector: 'app-medicamentos',
@@ -7,23 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicamentosComponent implements OnInit {
 
-  listadoMedicamentos = [
-    {nombre: 'Atamel', precio: 25},
-    {nombre: 'Cetirizina', precio: 25},
-    {nombre: 'Ibuprofeno', precio: 25},
-    {nombre: 'Diclofenac', precio: 25},
-    {nombre: 'Meloxican', precio: 25},
-    {nombre: 'Losartan', precio: 25},
-    {nombre: 'Furosemida', precio: 25},
+  listadoProductos: Producto[];
+  page: number= 1;
 
-
-
-
-  ]
-
-  constructor() { }
+  constructor( private productosservice: ProductosService) { }
 
   ngOnInit(): void {
+
+    this.listarProductos();
+  }
+
+
+  listarProductos() {
+
+    this.productosservice.getMedicamentos().subscribe((resp) => {
+       this.listadoProductos = resp.productos;
+
+
+    });
   }
 
 }

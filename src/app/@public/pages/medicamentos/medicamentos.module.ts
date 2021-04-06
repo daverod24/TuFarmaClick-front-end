@@ -3,13 +3,15 @@ import { CommonModule } from '@angular/common';
 
 import { MedicamentosRoutingModule } from './medicamentos-routing.module';
 import { MedicamentosComponent } from './medicamentos.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
   declarations: [MedicamentosComponent],
   imports: [
     CommonModule,
-    MedicamentosRoutingModule
+    MedicamentosRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class MedicamentosModule { }
