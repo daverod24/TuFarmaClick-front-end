@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators,FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/@core/services/auth.service';
+import Swal from 'sweetalert2';
+
 import { EmailValidatorService } from 'src/app/@public/pages/forms/validators/services/email-validator.service';
 import { ValidatorService } from 'src/app/@public/pages/forms/validators/services/validator.service';
 
@@ -51,5 +53,20 @@ export class AgregarUsuarioComponent implements OnInit {
  campoNoValido( campo: string ) {
   return this.miFormulario.get(campo)?.invalid
           && this.miFormulario.get(campo)?.touched;
+}
+
+registro() {
+  const { nombre, apellido, email, password } = this.miFormulario.value;
+
+  this.authService.registro( nombre, apellido, email, password)
+    .subscribe( ok => {
+
+      if ( ok === true ) {
+        this.router.navigateByUrl('/');
+      } else {
+        Swal.fire('Error', ok, 'error');
+      }
+    });
+
 }
 }

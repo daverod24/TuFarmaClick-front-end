@@ -27,7 +27,7 @@ export class ListarComponent implements OnInit {
 
   deleteUsuario(uid: string) {
     this.usuariosService.deleteUsuario(uid).subscribe((usuarioBorrado) => {
-      console.log(usuarioBorrado);
+
 
       this.actualizarUsuarios();
 
@@ -37,7 +37,6 @@ export class ListarComponent implements OnInit {
 
   actualizarUsuarios() {
     this.usuariosService.getUsuarios().subscribe((resp) => {
-      console.log(resp);
 
       this.usuarios = resp.usuarios;
     });

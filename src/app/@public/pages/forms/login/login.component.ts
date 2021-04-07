@@ -43,13 +43,11 @@ export class LoginComponent implements OnInit {
 
   //Inicio de sesión 
   login(){
-    // console.log(this.miFormulario.valid);
     const { email, password } = this.miFormulario.value;
 
     this.authService.login( email, password )
       .subscribe( ok => {
 
-        // console.log(ok);
         if ( ok === true ) {
           this.router.navigateByUrl('/');
         } else {

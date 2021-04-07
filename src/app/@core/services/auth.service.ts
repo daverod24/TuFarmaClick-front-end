@@ -60,7 +60,6 @@ export class AuthService {
     return this.http.post<AuthResponse>( url, body )
       .pipe(
         tap( resp => {
-          console.log(resp);
           if ( resp.ok ) {
             
             this.updateSession(resp);

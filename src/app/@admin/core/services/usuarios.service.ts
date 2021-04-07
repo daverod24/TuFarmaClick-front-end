@@ -36,9 +36,6 @@ deleteUsuario(uid: string): Observable<any> {
   return this.http.delete<any>( `${this.baseUrl}usuarios/${uid}`, {headers} )
 }
 
-agregarUsuario( usuario: Usuario ): Observable<Usuario>{
-  return this.http.post<Usuario>( `${ this.baseUrl }/usuario`, usuario);
-}
 
 // actualizarUsuario( ): Observable<any>{
 //   return this.http.put<any>( `${ this.baseUrl }/heroes/${ heroe.id }`, heroe);
