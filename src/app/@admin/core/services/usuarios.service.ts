@@ -32,14 +32,17 @@ deleteUsuario(uid: string): Observable<any> {
   const headers = new HttpHeaders()
   .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
 
-
   return this.http.delete<any>( `${this.baseUrl}usuarios/${uid}`, {headers} )
 }
 
 
-// actualizarUsuario( ): Observable<any>{
-//   return this.http.put<any>( `${ this.baseUrl }/heroes/${ heroe.id }`, heroe);
-// }
+getUsuariosPorId( uid: string ):Observable<any>{
+console.log(uid)
+  const headers = new HttpHeaders()
+  .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+  return this.http.get<any>(`${ this.baseUrl }usuarios/${uid}`, {headers});
+}
 
 
 }

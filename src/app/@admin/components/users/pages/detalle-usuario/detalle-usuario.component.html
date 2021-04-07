@@ -1,1 +1,115 @@
-<p>detalle-usuario works!</p>
+<div class="container">
+    <div class="row">
+      <div class="col-lg"></div>
+      <div class="col-lg-6">
+        <form [formGroup]="miFormulario">
+          <h1> Actualiza usuario:{{usuario.nombre}}</h1>
+          <hr />
+
+<div class="row">
+
+
+  <div class="col-md-6 col-sm-12">
+    <label for="name"><b>Nombre</b></label>
+          <input
+            type="text"
+            placeholder="Introduzca su nombre"
+            formControlName="nombre"
+            name="nombre"
+            [(ngModel)]="usuario.nombre"
+            class="form-control"
+            required
+          />
+          <div class="alert alert-danger" *ngIf="campoNoValido('nombre')">
+            <div >
+              El nombre es requerido.
+            </div>
+            
+          </div>
+
+</div>
+
+<div class="col-md-6 col-sm-12">
+  <label for="lastname"><b>Apellido</b></label>
+  <input
+    type="text"
+    placeholder="Introduzca su apellido"
+    name="lastname"
+    formControlName="apellido"
+    [(ngModel)]="usuario.apellido"
+    class="form-control"
+    required
+  />
+  <div class="alert alert-danger" *ngIf="campoNoValido('apellido')">
+    <div >
+    El apellido es requerido.
+    </div>
+    
+  </div>
+
+
+</div>
+</div>
+
+
+
+    <div class="row">
+      <div class="col">
+        <!-- <label for="floatingSelectGrid">Rol</label>
+        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" name="rol"
+        formControlName="rol" >
+          <option *ngFor="let users of usuario" [value]="users.rol" selected>{{users.rol}}</option>
+          <option value=""></option>
+          <option  ></option>
+        </select> -->
+
+        
+      </div>
+
+
+      <div class="col">
+        <!-- <label for="floatingSelectGrid">Estado</label>
+        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" name="estado"
+        formControlName="estado" [(ngModel)]="usuario.estado" >
+          <option selected >Selecciona en el menú</option>
+          <option value="False">False</option>
+          <option value="True">True</option>
+        </select> -->
+
+        
+      </div>
+    </div>
+
+
+          <label for="email"><b>Correo</b></label>
+          <input
+            type="text"
+            placeholder="Introduzca su email"
+            name="email"
+            [(ngModel)]="usuario.email"
+            class="form-control"
+            formControlName="email"
+            required
+          />
+          <div class="alert alert-danger" *ngIf="campoNoValido('email')">
+            <div>
+              {{ emailErrorMsg }}
+            </div>
+       
+          </div>
+  
+         
+          
+  
+        
+          <div class="row">
+            <div class="col-lg">
+              <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Actualizar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+      <div class="col-lg"></div>
+    </div>
+  </div>

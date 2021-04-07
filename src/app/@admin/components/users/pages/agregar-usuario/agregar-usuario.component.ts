@@ -1,12 +1,13 @@
-import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators,FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute} from '@angular/router';
 import { AuthService } from 'src/app/@core/services/auth.service';
 import Swal from 'sweetalert2';
 
 import { EmailValidatorService } from 'src/app/@public/pages/forms/validators/services/email-validator.service';
 import { ValidatorService } from 'src/app/@public/pages/forms/validators/services/validator.service';
+import { switchMap } from 'rxjs/operators';
+import { UsuariosService } from 'src/app/@admin/core/services/usuarios.service';
 
 @Component({
   selector: 'app-agregar-usuario',
@@ -23,6 +24,7 @@ export class AgregarUsuarioComponent implements OnInit {
   }, {
     validators: [ this.validatorService.camposIguales('password','password2') ]
   });
+
 
   get emailErrorMsg(): string {
     
@@ -43,12 +45,14 @@ export class AgregarUsuarioComponent implements OnInit {
     private emailValidator: EmailValidatorService, 
     private validatorService: ValidatorService,
     private authService: AuthService,
-    private router: Router) { }
+    private usuariosService: UsuariosService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
-
-
+    
   }
+
  //Validaciones campos de formulario
  campoNoValido( campo: string ) {
   return this.miFormulario.get(campo)?.invalid
@@ -56,10 +60,9 @@ export class AgregarUsuarioComponent implements OnInit {
 }
 
 registro() {
-  // const { nombre, apellido, email, password } = this.miFormulario.value;
 
   Swal.fire({
-    title: 'Desea guardar los cambios?',
+    title: '¿Desea guardar los cambios?',
     showDenyButton: true,
     showCancelButton: true,
     confirmButtonText: `Guardar`,
@@ -69,7 +72,7 @@ registro() {
     if (result.isConfirmed) {
 
       const { nombre, apellido, email, password } = this.miFormulario.value;
-      // REgistramos el usuario
+      // Registramos el usuario
 this.authService.registro(nombre, apellido, email, password).subscribe((usuarioRegistrado) =>{
   if(usuarioRegistrado) {
     Swal.fire('Usuario guardado con exito!', '', 'success')
@@ -79,23 +82,11 @@ this.authService.registro(nombre, apellido, email, password).subscribe((usuarioR
   }
 
 })
-
-
       
     } else if (result.isDenied) {
       Swal.fire('Usuario no guardado', '', 'info')
     }
   })
-
-  // this.authService.registro( nombre, apellido, email, password)
-  //   .subscribe( ok => {
-
-  //     if ( ok ) {
-  //       this.router.navigateByUrl('/');
-  //     } else {
-  //       Swal.fire('Error', ok, 'error');
-  //     }
-  //   });
 
 }
 }
