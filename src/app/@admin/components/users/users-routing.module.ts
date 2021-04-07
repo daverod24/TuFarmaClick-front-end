@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AgregarUsuarioComponent } from './pages/agregar-usuario/agregar-usuario.component';
+import { DetalleUsuarioComponent } from './pages/detalle-usuario/detalle-usuario.component';
 import { ListarComponent } from './pages/listar/listar.component';
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
     path: 'agregar',
     component: AgregarUsuarioComponent,
   },
+  {
+    path: 'detalleuser/:uid',
+    component: DetalleUsuarioComponent,
+  }
      
 ];
 

@@ -13,7 +13,7 @@
       <div class="row row-cols-1 row-cols-md-2 row-cols-md-4 g-4">
         <div class="col" *ngFor="let medicamentos of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
             <div class="card mb-3 h-25"  >
-                <img src="./assets/imagenes/medicamentos/noimage.png" class="card-img-top" alt="...">
+                <img [src]="medicamentos.img" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h5 class="card-title">{{medicamentos.nombre}}</h5>
                   <p class="card-text">Precio: {{medicamentos.precio}}</p>

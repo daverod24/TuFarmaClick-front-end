@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../../../core/services/usuarios.service';
 import { Usuario } from '../../../../core/interfaces/user.interface';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-listar',
@@ -26,18 +27,35 @@ export class ListarComponent implements OnInit {
   }
 
   deleteUsuario(uid: string) {
-    this.usuariosService.deleteUsuario(uid).subscribe((usuarioBorrado) => {
-      console.log(usuarioBorrado);
+    Swal.fire({
+      title: '¿Estas Seguro de borrar al usuario?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '¡Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.usuariosService.deleteUsuario(uid).subscribe((usuarioBorrado) => {
 
-      this.actualizarUsuarios();
 
-      this.router.navigate(['/admin/users']);
-    });
+           this.actualizarUsuarios();
+      
+           this.router.navigate(['/admin/users']);
+         });
+        Swal.fire(
+          'Borrado!',
+          'El usuario se borro con éxito.',
+          'success'
+        )
+      }
+    })
+    // 
   }
 
   actualizarUsuarios() {
     this.usuariosService.getUsuarios().subscribe((resp) => {
-      console.log(resp);
 
       this.usuarios = resp.usuarios;
     });

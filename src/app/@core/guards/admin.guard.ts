@@ -17,7 +17,6 @@ export class AdminGuard implements CanActivate, CanLoad {
       return this.authService.validarUsuarioAdmin()
               .pipe(
                 tap( valid => {
-                  console.log(valid)
                   if ( !valid ) {
                     this.router.navigateByUrl('/login');
                   }
