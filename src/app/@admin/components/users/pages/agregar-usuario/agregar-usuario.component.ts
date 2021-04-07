@@ -56,17 +56,46 @@ export class AgregarUsuarioComponent implements OnInit {
 }
 
 registro() {
-  const { nombre, apellido, email, password } = this.miFormulario.value;
+  // const { nombre, apellido, email, password } = this.miFormulario.value;
 
-  this.authService.registro( nombre, apellido, email, password)
-    .subscribe( ok => {
+  Swal.fire({
+    title: 'Desea guardar los cambios?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: `Guardar`,
+    denyButtonText: `No guardar`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
 
-      if ( ok === true ) {
-        this.router.navigateByUrl('/');
-      } else {
-        Swal.fire('Error', ok, 'error');
-      }
-    });
+      const { nombre, apellido, email, password } = this.miFormulario.value;
+      // REgistramos el usuario
+this.authService.registro(nombre, apellido, email, password).subscribe((usuarioRegistrado) =>{
+  if(usuarioRegistrado) {
+    Swal.fire('Usuario guardado con exito!', '', 'success')
+    this.miFormulario.reset();
+  } else {
+    Swal.fire('Usuario no guardado', '', 'info')
+  }
+
+})
+
+
+      
+    } else if (result.isDenied) {
+      Swal.fire('Usuario no guardado', '', 'info')
+    }
+  })
+
+  // this.authService.registro( nombre, apellido, email, password)
+  //   .subscribe( ok => {
+
+  //     if ( ok ) {
+  //       this.router.navigateByUrl('/');
+  //     } else {
+  //       Swal.fire('Error', ok, 'error');
+  //     }
+  //   });
 
 }
 }
