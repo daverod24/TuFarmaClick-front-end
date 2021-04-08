@@ -34,21 +34,32 @@ export class ProductosService {
   }
 
 
-  createProducto(data:any): Observable<any> {
+  createProducto(producto:any): Observable<any> {
 
-
-
-
-    // const body = {
-    //   precio, nombre, categoria, usuario, 
-    // }
     const headers = new HttpHeaders()
     .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
 
-
-    // console.log(archivo)
-
-
-    return this.http.post<any>(`${this.baseUrl}productos`,data, {headers} )
+    return this.http.post<any>(`${this.baseUrl}productos`,producto, {headers} )
   }
+
+
+  getCategorias(): Observable<any> {
+    return this.http.get<any>( `${this.baseUrl}categorias` )
+  }
+
+
+  getProductoPorId(id: string) : Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}productos/${id}`)
+  }
+
+  actualizarProducto(id: string, producto : any) : Observable<any> {
+
+
+    const headers = new HttpHeaders()
+    .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.put<any>(`${this.baseUrl}productos/${id}`,producto, {headers}  )
+  }
+
+
 }
