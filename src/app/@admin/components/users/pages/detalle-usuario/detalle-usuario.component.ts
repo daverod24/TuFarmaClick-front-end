@@ -6,6 +6,7 @@ import { UsuariosService } from 'src/app/@admin/core/services/usuarios.service';
 import { AuthService } from 'src/app/@core/services/auth.service';
 import { EmailValidatorService } from 'src/app/@public/pages/forms/validators/services/email-validator.service';
 import { ValidatorService } from 'src/app/@public/pages/forms/validators/services/validator.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle-usuario',
@@ -13,7 +14,6 @@ import { ValidatorService } from 'src/app/@public/pages/forms/validators/service
   styleUrls: ['./detalle-usuario.component.scss']
 })
 export class DetalleUsuarioComponent implements OnInit {
-
 
   usuario = {
     nombre: '',
@@ -24,14 +24,14 @@ export class DetalleUsuarioComponent implements OnInit {
     uid: '',
     img: ''
   }
-  
+ 
   
   miFormulario:  FormGroup = this.fb.group({
     nombre: [ '', [Validators.required]],
     apellido: [ '', [Validators.required]],
     email: ['', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ]],
-    rol: ['', [Validators.required]],
-    estado: [this.usuario.estado, [Validators.required]]
+    rol: [this.usuario.rol, [ Validators.required ]],
+    estado: [true]
   });
   get emailErrorMsg(): string {
     
@@ -43,8 +43,6 @@ export class DetalleUsuarioComponent implements OnInit {
       return 'El valor ingresado no tiene formato de correo';
     }
   }
-
-
 
 
   constructor(private usuariosService: UsuariosService,
@@ -61,12 +59,44 @@ export class DetalleUsuarioComponent implements OnInit {
     ).subscribe(usuario => {
       this.usuario = usuario;
     })
-  }
 
+  
+  }
+ 
   //Validaciones campos de formulario
  campoNoValido( campo: string ) {
   return this.miFormulario.get(campo)?.invalid
           && this.miFormulario.get(campo)?.touched;
 }
+
+//Actualizar usuario
+
+actualizarUsuario( ){
+  Swal.fire({
+    title: 'Do you want to save the changes?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: `Save`,
+    denyButtonText: `Don't save`,
+  }).then((result) => {
+    /* Read more about isConfirmed, isDenied below */
+    if (result.isConfirmed) {
+      console.log(this.usuario)
+      this.usuariosService.actualizarUsuario( this.usuario ).
+       subscribe ( usuario => {
+        console.log(usuario);
+    });
+      Swal.fire('Saved!', '', 'success')
+    } else if (result.isDenied) {
+      Swal.fire('Changes are not saved', '', 'info')
+    }
+  })
+  
+    
+}
+//   
+// }
+// this.heroesService.actualizarHeroe( this.heroe )
+// .subscribe(heroe =>  this.mostrarSnakbar('Registro actualizado'));
 
 }

@@ -2,8 +2,8 @@
     <div class="row">
       <div class="col-lg"></div>
       <div class="col-lg-6">
-        <form [formGroup]="miFormulario">
-          <h1> Actualiza usuario:{{usuario.nombre}}</h1>
+        <form [formGroup]="miFormulario" (ngSubmit)="actualizarUsuario()">
+          <h1> Usuario: {{usuario.nombre}} {{usuario.apellido}}</h1>
           <hr />
 
 <div class="row">
@@ -51,30 +51,26 @@
 </div>
 </div>
 
-
-
     <div class="row">
       <div class="col">
-        <!-- <label for="floatingSelectGrid">Rol</label>
-        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" name="rol"
-        formControlName="rol" >
-          <option *ngFor="let users of usuario" [value]="users.rol" selected>{{users.rol}}</option>
-          <option value=""></option>
-          <option  ></option>
-        </select> -->
+        <label for="rol">Rol</label>
+        <select class="form-select" id="rol" aria-label="Floating label select example" 
+        formControlName="rol"  [value]="usuario.rol">
+          <option  value="ADMIN_ROLE" selected>ADMIN_ROLE</option>
+          <option  value="USER_ROLE" >USER_ROLE</option>
 
+        </select>
         
       </div>
 
 
       <div class="col">
-        <!-- <label for="floatingSelectGrid">Estado</label>
-        <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" name="estado"
-        formControlName="estado" [(ngModel)]="usuario.estado" >
-          <option selected >Selecciona en el menú</option>
-          <option value="False">False</option>
-          <option value="True">True</option>
-        </select> -->
+        <label for="estado">Estado</label>
+        <select class="form-select" id="estado" aria-label="Floating label select example" name="estado"
+        formControlName="estado" [value]="usuario.estado" >
+          <option value="false" selected>false</option>
+          <option value="true" selected>true</option>
+        </select> 
 
         
       </div>
@@ -97,19 +93,17 @@
             </div>
        
           </div>
-  
-         
-          
-  
         
           <div class="row">
             <div class="col-lg">
               <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Actualizar</button>
             </div>
           </div>
+          {{miFormulario.valid | json}}
+          {{miFormulario.value | json }}
+
         </form>
       </div>
-  
-      <div class="col-lg"></div>
     </div>
   </div>
+
