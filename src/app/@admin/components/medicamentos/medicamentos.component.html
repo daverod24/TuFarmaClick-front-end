@@ -1,4 +1,35 @@
-<p>medicamentos works!</p>
-<button type="submit" [routerLink]="['agregarprd']">Agregar Producto</button>
 
+<div class="container">
+  <!-- <nav class="navbar">
+      <div class="container-fluid justify-content-end">
+        <form class="d-flex" [formGroup]="miFormulario">
+          <input class="form-control me-2" type="search" placeholder="Que medicamentos necesitas" aria-label="Search">
+          <button class="btn btn-primary" type="submit">Buscar</button>
+        </form>
+      </div>
+    </nav> -->
+    
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-md-4 g-4">
+      <div class="col" *ngFor="let medicamentos of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
+          <div class="card mb-3 h-25"  >
+              <img [src]="medicamentos.img" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{medicamentos.nombre}}</h5>
+                <p class="card-text">Precio: {{medicamentos.precio}}</p>
+                <a href="#" class="btn btn-primary">Agregar</a>
+              </div>
+            </div>
+       </div>
+
+   </div>
+   <div class="d-flex justify-content-center">
+    <pagination-controls (pageChange)="page = $event" autoHide="true"
+    responsive="true"
+    previousLabel="Anterior"
+    nextLabel="Siguiente"></pagination-controls>
+  </div>
+  
+
+</div>
 

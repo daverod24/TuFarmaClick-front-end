@@ -1,1 +1,88 @@
-<p>agregar-productos works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-lg"></div>
+    <div class="col-lg-6">
+      <form [formGroup]="miFormulario" (ngSubmit)="registro()">
+        <h1>Añadir producto</h1>
+        <hr />
+
+
+        <!-- Nombre -->
+        <label for="name"><b>Nombre</b></label>
+        <input
+          type="text"
+          placeholder="Introduzca su nombre"
+          formControlName="nombre"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('nombre')">
+          <div>El nombre es requerido.</div>
+        </div>
+
+        <!-- Categoria -->
+
+        <label for="lastname"><b>categoria</b></label>
+        <input
+          type="text"
+          placeholder="Categoria"
+          name="categoria"
+          formControlName="categoria"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('categoria')">
+          <div>Categoria es requerida.</div>
+        </div>
+
+
+
+        <!-- Precio -->
+        <label for="email"><b>Precio</b></label>
+        <input
+          type="text"
+          placeholder="Introduzca el precio"
+          name="precio"
+          class="form-control"
+          formControlName="precio"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('precio')">
+          <div>
+            <div>Precio es requerido.</div>
+          </div>
+        </div>
+
+
+        <!-- Imagen -->
+        <label for="img"><b>Imagen</b></label>
+        <input
+          type="file"
+          (change)="capturarFile($event)"
+          placeholder="Imagen"
+          formControlName="img"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('img')">
+          <div>Imagen es requerida.</div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-lg">
+            <button
+              type="submit"
+              class="signup-btn"
+              [disabled]="miFormulario.invalid"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-lg"></div>
+  </div>
+</div>

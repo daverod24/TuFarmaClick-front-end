@@ -6,13 +6,15 @@ import { AdminComponent } from './admin.component';
 import { HeaderComponent } from '../core/components/header/header.component';
 import { NavbarComponent } from '../core/components/navbar/navbar.component';
 import { FooterComponent } from '../core/components/footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [AdminComponent, HeaderComponent, NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }

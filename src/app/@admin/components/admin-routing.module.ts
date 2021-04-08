@@ -26,6 +26,12 @@ const routes: Routes = [
         path: 'medicamentos',
         loadChildren: () => import('./medicamentos/medicamentos.module').then(m => m.MedicamentosModule)
       }
+
+
+      
+
+
+
     ]
   }
 ];
