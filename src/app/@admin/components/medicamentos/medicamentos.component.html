@@ -1,28 +1,38 @@
 
 <div class="container">
-  <!-- <nav class="navbar">
-      <div class="container-fluid justify-content-end">
-        <form class="d-flex" [formGroup]="miFormulario">
-          <input class="form-control me-2" type="search" placeholder="Que medicamentos necesitas" aria-label="Search">
-          <button class="btn btn-primary" type="submit">Buscar</button>
-        </form>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1>{{ titulo }}</h1>
+        <hr />
+        <br />
       </div>
-    </nav> -->
-    
+      <div class="col">
+        <button type="submit" [routerLink]="['nuevoProducto']"  class="btn btn-info btn-sm"> Nuevo medicamente +</button>
+  
+      </div>
+  
+    </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-md-4 g-4">
-      <div class="col" *ngFor="let medicamentos of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
-          <div class="card mb-3 h-25"  >
-              <img [src]="medicamentos.img" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{medicamentos.nombre}}</h5>
-                <p class="card-text">Precio: {{medicamentos.precio}}</p>
-                <a href="#" class="btn btn-primary">Agregar</a>
-              </div>
-            </div>
-       </div>
 
-   </div>
+   <div class="row row-cols-1 row-cols-md-5 g-4">
+    <div class="col" *ngFor="let medicamento of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
+      <div class="card" >
+        <img [src]="medicamento.img" class="card-img-top" alt="..." style="height: 12rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{medicamento.nombre}}</h5>
+          <p class="card-text">Precio: {{medicamento.precio}}</p>
+          <a class="btn btn-primary btn-sm" [routerLink]="['editarProducto', medicamento._id]">Editar</a>
+          <a class="btn btn-danger m-2 btn-sm" (click)="deleteProdcuto(medicamento._id, medicamento.nombre)">Eliminar</a>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
    <div class="d-flex justify-content-center">
     <pagination-controls (pageChange)="page = $event" autoHide="true"
     responsive="true"

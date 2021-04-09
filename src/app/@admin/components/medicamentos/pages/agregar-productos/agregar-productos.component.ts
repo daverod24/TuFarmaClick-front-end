@@ -10,20 +10,18 @@ import { ProductosService } from '../../../../../@core/services/productos.servic
   styleUrls: ['./agregar-productos.component.scss'],
 })
 export class AgregarProductosComponent implements OnInit {
-
   imagenProducto: Array<File>;
+  categorias: any[];
+  categoria: string;
 
-
-nuevoProducto = new FormData;
-
+  nuevoProducto = new FormData();
 
   miFormulario: FormGroup = this.fb.group(
     {
-      precio: [32323, [Validators.required]],
-      nombre: ['Atamel', [Validators.required]],
-      categoria: ['606c658fa8c4cc5cfdb69d44', [Validators.required]],
-      usuario: ['60637cb9d5520a9260b59a8a', [Validators.required]],
-      img: [, [Validators.required]],
+      precio: [0, [Validators.required, Validators.min(0)]],
+      nombre: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+      img: [, []],
     },
     {
       validators: [
@@ -35,10 +33,16 @@ nuevoProducto = new FormData;
   constructor(
     private fb: FormBuilder,
     private validatorService: ValidatorService,
-    private productosservice: ProductosService
+    private productosService: ProductosService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // cargamos las categorias
+
+    this.productosService.getCategorias().subscribe((resp) => {
+      this.categorias = resp.categorias;
+    });
+  }
   //Validaciones campos de formulario
   campoNoValido(campo: string) {
     return (
@@ -57,49 +61,42 @@ nuevoProducto = new FormData;
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        const {
-          precio,
-          nombre,
-          categoria,
-          usuario,
-        
-        } = this.miFormulario.value;
+        const { precio, nombre, categoria } = this.miFormulario.value;
 
-       
-        this.nuevoProducto.set("archivo", this.imagenProducto[0])
-        this.nuevoProducto.set("precio", precio)
-        this.nuevoProducto.set("nombre", nombre)
-        this.nuevoProducto.set("categoria", categoria)
-        this.nuevoProducto.set("usuario", usuario)
+        if (this.imagenProducto) {
+          this.nuevoProducto.set('archivo', this.imagenProducto[0]);
+        }
+
+        this.nuevoProducto.set('precio', precio);
+        this.nuevoProducto.set('nombre', nombre);
+        this.nuevoProducto.set('categoria', this.categoria);
 
         // Registramos el nuevo producto
-        this.productosservice
-          .createProducto(this.nuevoProducto)
-          .subscribe((productoCreado) => {
+        this.productosService.createProducto(this.nuevoProducto).subscribe(
+          (productoCreado) => {
             if (productoCreado) {
               Swal.fire('Producto guardado con exito!', '', 'success');
               this.miFormulario.reset();
-            } 
-          }, err => {
-
-            console.log(err.error.msg)
-            Swal.fire(
-              'Ha ocurrido un error: ' + err.error.msg,
-              '',
-              'error'
-            );
-          });
+            }
+          },
+          (err) => {
+            console.log(err.error.msg);
+            Swal.fire('Ha ocurrido un error: ' + err.error.msg, '', 'error');
+          }
+        );
       } else if (result.isDenied) {
         Swal.fire('Producto no guardado', '', 'info');
       }
     });
   }
 
-
   capturarFile(event) {
+    this.imagenProducto = <Array<File>>event.target.files;
+  }
 
-    this.imagenProducto=<Array<File>> event.target.files;
- 
+  asignarCategoria(categoria) {
+    this.categoria = categoria;
 
+    console.log(this.categoria);
   }
 }

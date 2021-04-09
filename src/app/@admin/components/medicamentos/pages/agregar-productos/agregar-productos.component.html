@@ -6,7 +6,6 @@
         <h1>Añadir producto</h1>
         <hr />
 
-
         <!-- Nombre -->
         <label for="name"><b>Nombre</b></label>
         <input
@@ -20,21 +19,23 @@
           <div>El nombre es requerido.</div>
         </div>
 
+
         <!-- Categoria -->
 
-        <label for="lastname"><b>categoria</b></label>
-        <input
-          type="text"
-          placeholder="Categoria"
+        <label for="lastname"><b>Categoria</b></label>
+        <select
+          class="form-control"
+          (change)="asignarCategoria($event.target.value)"
           name="categoria"
           formControlName="categoria"
-          class="form-control"
-          required
-        />
+        >
+          <option *ngFor="let categoria of categorias" [value]="categoria._id">
+            {{ categoria.nombre }}
+          </option>
+        </select>
         <div class="alert alert-danger" *ngIf="campoNoValido('categoria')">
           <div>Categoria es requerida.</div>
         </div>
-
 
 
         <!-- Precio -->
@@ -53,7 +54,6 @@
           </div>
         </div>
 
-
         <!-- Imagen -->
         <label for="img"><b>Imagen</b></label>
         <input
@@ -62,12 +62,10 @@
           placeholder="Imagen"
           formControlName="img"
           class="form-control"
-          required
         />
         <div class="alert alert-danger" *ngIf="campoNoValido('img')">
           <div>Imagen es requerida.</div>
         </div>
-
 
         <div class="row">
           <div class="col-lg">
