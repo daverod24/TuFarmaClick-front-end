@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractControl, AsyncValidator, ValidationErrors } from '@angular/forms';
+import { AbstractControl, AsyncValidator, FormControl, ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EmailValidatorService implements AsyncValidator {
   private baseUrl: string = environment.baseUrl;
+  
 
   constructor( private http: HttpClient ) { }
 
@@ -28,4 +29,5 @@ export class EmailValidatorService implements AsyncValidator {
                 );
 
   }
+
 }

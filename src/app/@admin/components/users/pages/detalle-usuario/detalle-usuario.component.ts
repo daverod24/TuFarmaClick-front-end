@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { UsuariosService } from 'src/app/@admin/core/services/usuarios.service';
@@ -30,8 +30,9 @@ export class DetalleUsuarioComponent implements OnInit {
     nombre: [ '', [Validators.required]],
     apellido: [ '', [Validators.required]],
     email: ['', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ]],
-    rol: [this.usuario.rol, [ Validators.required ]],
-    estado: [true]
+    rol: ['' , [Validators.required]],
+    estado: ['true' , [Validators.required]]
+
   });
   get emailErrorMsg(): string {
     
@@ -69,7 +70,6 @@ export class DetalleUsuarioComponent implements OnInit {
           && this.miFormulario.get(campo)?.touched;
 }
 
-//Actualizar usuario
 
 actualizarUsuario( ){
   Swal.fire({
@@ -94,9 +94,6 @@ actualizarUsuario( ){
   
     
 }
-//   
-// }
-// this.heroesService.actualizarHeroe( this.heroe )
-// .subscribe(heroe =>  this.mostrarSnakbar('Registro actualizado'));
+
 
 }

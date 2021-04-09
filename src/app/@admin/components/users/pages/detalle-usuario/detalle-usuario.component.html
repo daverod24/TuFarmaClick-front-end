@@ -10,7 +10,7 @@
 
 
   <div class="col-md-6 col-sm-12">
-    <label for="name"><b>Nombre</b></label>
+    <label for="name"><b>Nombre:</b></label>
           <input
             type="text"
             placeholder="Introduzca su nombre"
@@ -30,7 +30,7 @@
 </div>
 
 <div class="col-md-6 col-sm-12">
-  <label for="lastname"><b>Apellido</b></label>
+  <label for="lastname"><b>Apellido:</b></label>
   <input
     type="text"
     placeholder="Introduzca su apellido"
@@ -53,29 +53,40 @@
 
     <div class="row">
       <div class="col">
-        <label for="rol">Rol</label>
-        <select class="form-select" id="rol" aria-label="Floating label select example" 
-        formControlName="rol"  [value]="usuario.rol">
-          <option  value="ADMIN_ROLE" selected>ADMIN_ROLE</option>
-          <option  value="USER_ROLE" >USER_ROLE</option>
+        <label for="lastname"><b>Rol:</b></label>
+  <input
+    type="text"
+    placeholder="Ej. USER_ROLE o ADMIN_ROLE"
+    name="rol"
+    formControlName="rol"
+    [(ngModel)]="usuario.rol"
+    class="form-control"
+  />
+  <div class="alert alert-danger" *ngIf="campoNoValido('rol')">
+    <div >
+    El campo es requerido, indique si es USER_ROLE o ADMIN_ROLE.
+    </div>
+    
+  </div>
 
-        </select>
+
         
       </div>
-
-
       <div class="col">
-        <label for="estado">Estado</label>
+        <label for="estado"><b>Estado:</b></label>
         <select class="form-select" id="estado" aria-label="Floating label select example" name="estado"
         formControlName="estado" [value]="usuario.estado" >
           <option value="false" selected>false</option>
           <option value="true" selected>true</option>
         </select> 
-
+  
         
       </div>
-    </div>
 
+
+    </div>
+   
+    
 
           <label for="email"><b>Correo</b></label>
           <input
@@ -104,6 +115,8 @@
 
         </form>
       </div>
+
+      <div class="col-lg"></div>
     </div>
-  </div>
+</div>
 
