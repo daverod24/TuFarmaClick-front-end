@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 
 import { EmailValidatorService } from 'src/app/@public/pages/forms/validators/services/email-validator.service';
 import { ValidatorService } from 'src/app/@public/pages/forms/validators/services/validator.service';
-import { switchMap } from 'rxjs/operators';
 import { UsuariosService } from 'src/app/@admin/core/services/usuarios.service';
 
 @Component({

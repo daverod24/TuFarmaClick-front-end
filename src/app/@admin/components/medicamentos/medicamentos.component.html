@@ -16,15 +16,15 @@
     </div>
 
 
-   <div class="row row-cols-1 row-cols-md-5 g-4">
+   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
     <div class="col" *ngFor="let medicamento of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
-      <div class="card" >
-        <img [src]="medicamento.img" class="card-img-top" alt="..." style="height: 12rem;">
+      <div class="card mb-3" >
+        <img [src]="medicamento.img" class="card-img-top" alt="..." >
         <div class="card-body">
           <h5 class="card-title">{{medicamento.nombre}}</h5>
           <p class="card-text">Precio: {{medicamento.precio}}</p>
-          <a class="btn btn-primary btn-sm" [routerLink]="['editarProducto', medicamento._id]">Editar</a>
-          <a class="btn btn-danger m-2 btn-sm" (click)="deleteProdcuto(medicamento._id, medicamento.nombre)">Eliminar</a>
+          <a class="btn btn-info btn-sm" [routerLink]="['editarProducto', medicamento._id]"><i class="far fa-edit icon"></i></a>
+          <a class="btn btn-danger m-2 btn-sm" (click)="deleteProdcuto(medicamento._id, medicamento.nombre)"><i class="far fa-trash-alt icon"></i></a>
 
         </div>
       </div>

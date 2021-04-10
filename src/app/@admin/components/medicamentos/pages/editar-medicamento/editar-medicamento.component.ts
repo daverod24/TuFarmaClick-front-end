@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { ValidatorService } from 'src/app/@public/pages/forms/validators/services/validator.service';
 import Swal from 'sweetalert2';
 import { ProductosService } from '../../../../../@core/services/productos.service';
 import { ActivatedRoute } from '@angular/router';
@@ -24,17 +23,11 @@ export class EditarMedicamentoComponent implements OnInit {
       nombre: ['', [Validators.required]],
       categoria: ['', [Validators.required]],
       img: [, []],
-    },
-    {
-      validators: [
-        this.validatorService.camposIguales('password', 'password2'),
-      ],
     }
   );
 
   constructor(
     private fb: FormBuilder,
-    private validatorService: ValidatorService,
     private productosService: ProductosService,
     private activatedRoute: ActivatedRoute
   ) {}
@@ -68,6 +61,10 @@ export class EditarMedicamentoComponent implements OnInit {
       this.miFormulario.get(campo)?.touched
     );
   }
+
+  
+
+  //Registro de usuario
 
   registro() {
     Swal.fire({

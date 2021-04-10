@@ -43,22 +43,36 @@ export class ProductosService {
   }
 
 
-  getCategorias(): Observable<any> {
-    return this.http.get<any>( `${this.baseUrl}categorias` )
-  }
-
-
   getProductoPorId(id: string) : Observable<any> {
     return this.http.get<any>(`${this.baseUrl}productos/${id}`)
   }
 
   actualizarProducto(id: string, producto : any) : Observable<any> {
-
-
     const headers = new HttpHeaders()
     .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
 
     return this.http.put<any>(`${this.baseUrl}productos/${id}`,producto, {headers}  )
+  }
+
+//Categoria
+  getCategorias(): Observable<any> {
+    return this.http.get<any>( `${this.baseUrl}categorias` )
+  }
+
+  deleteCategoria(idCategoria: string): Observable<any> {
+
+    const headers = new HttpHeaders()
+    .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.delete<any>(`${this.baseUrl}categorias/${idCategoria}`, {headers})
+
+  }
+  createCategoria(body: any): Observable<any> {
+
+    const headers = new HttpHeaders()
+    .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.post<any>(`${this.baseUrl}categorias`,body, {headers} )
   }
 
 

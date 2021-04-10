@@ -12,7 +12,7 @@ export class MedicamentosComponent implements OnInit {
   listadoProductos: Producto[];
   page: number= 1;
 
-  constructor( private productosservice: ProductosService) { }
+  constructor( private productosService: ProductosService) { }
 
   ngOnInit(): void {
 
@@ -22,7 +22,7 @@ export class MedicamentosComponent implements OnInit {
 
   listarProductos() {
 
-    this.productosservice.getMedicamentos().subscribe((resp) => {
+    this.productosService.getMedicamentos().subscribe((resp) => {
        this.listadoProductos = resp.productos;
 
 

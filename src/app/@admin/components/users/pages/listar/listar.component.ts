@@ -29,7 +29,6 @@ export class ListarComponent implements OnInit {
   deleteUsuario(uid: string) {
     Swal.fire({
       title: '¿Estas Seguro de borrar al usuario?',
-      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -38,8 +37,6 @@ export class ListarComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.usuariosService.deleteUsuario(uid).subscribe((usuarioBorrado) => {
-
-
            this.actualizarUsuarios();
       
            this.router.navigate(['/admin/users']);

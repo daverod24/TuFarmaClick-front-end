@@ -20,7 +20,7 @@ export class UsuariosService {
   ) { }
 
 
-getUsuarios ( ): Observable<Usuarios> {
+getUsuarios (): Observable<Usuarios> {
 
   return this.http.get<Usuarios>(  `${this.baseUrl}usuarios` )
 

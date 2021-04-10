@@ -1,0 +1,156 @@
+<div class="container">
+    <div class="row">
+      <div class="col-lg"></div>
+      <div class="col-lg-8">
+        <form [formGroup]="miFormulario">
+          <h1>Registro de usuario PREMIUM</h1>
+          <p>
+            Tu salud es lo más importante para nosotros 
+        </p>
+        <p class="text-muted">
+            Ingresa tus datos personales para que recibas tu nueva tarjeta Tufarma+
+          </p>
+          <hr />
+          <!--Nombre-->
+<div class="row">
+    <div class="col-6">
+        <label for="name"><b>Nombre</b></label>
+        <input
+          type="text"
+          placeholder="Introduzca su nombre"
+          formControlName="nombre"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('nombre')">
+          <div >
+            El nombre es requerido.
+          </div>
+          
+        </div>
+    </div>
+    
+    <!--Apellido-->
+    <div class="col-6">
+        <label for="lastname"><b>Apellido</b></label>
+        <input
+          type="text"
+          placeholder="Introduzca su apellido"
+          name="lastname"
+          formControlName="apellido"
+          class="form-control"
+          required
+        />
+        <div class="alert alert-danger" *ngIf="campoNoValido('apellido')">
+          <div >
+          El apellido es requerido.
+          </div>
+          
+        </div>
+    </div>
+</div>
+    <!--Correo-->
+          
+          <label for="email"><b>¿En qué dirección de correo electrónico podemos comunicarnos con usted? 
+              Esto es solo para ponerse en contacto, no para enviar spam. </b></label>
+          <input
+            type="text"
+            placeholder="Introduzca su email"
+            name="email"
+            class="form-control"
+            formControlName="email"
+            required
+          />
+          <div class="alert alert-danger" *ngIf="campoNoValido('email')">
+            <div>
+              {{ emailErrorMsg }}
+            </div>
+       
+          </div>
+         
+          <!--Numero de contacto y país-->
+          <div class="row">
+              <div class="col-6">
+                <label for="password"><b>Número de Whatsapp</b></label>
+                <input
+                  type="text"
+                  placeholder="Introduzca su número"
+                  formControlName="numero"
+                  class="form-control"
+                  required
+                />
+                <div class="alert alert-danger" *ngIf="campoNoValido('password')">
+                  <div>
+                    Introduzca un número por favor
+                  </div>
+                </div>
+      
+              </div>
+              <div class="col-6">
+                <label for="lastname"><b>En que país te encuentras:</b></label>
+                <select class="form-select" aria-label="Default select example" formControlName="pais">
+                  <option selected >Seleccione un país</option>
+                  <option  *ngFor="let pais of paises">{{pais.name}}</option>
+        
+                </select>
+      
+              </div>
+              <div class="alert alert-danger" *ngIf="campoNoValido('pais')">
+                <div >
+                  El campo es requerido.
+                </div>
+                
+              </div>
+          </div>
+
+           <!--Familiar-->
+           <label for="lastname"><b>Indicanos que familiar quieres abastecer:</b></label>
+           <select class="form-select" aria-label="Default select example" formControlName="familiar">
+             <option selected>Escoge una opción</option>
+             <option value="1">Mama</option>
+             <option value="2">Papá</option>
+             <option value="3">Hermano</option>
+             <option value="4">Hijo</option>
+             <option value="5">Abuela</option>
+             <option value="6">Abuelo</option>
+             <option value="7">Otro</option>
+           </select>
+           <div class="alert alert-danger" *ngIf="campoNoValido('familiar')">
+            <div >
+              El campo es requerido.
+            </div>
+            
+          </div>
+
+           <!--Medicamentos-->
+           <div class="col-12">
+            <label for="lastname"><b>¿Cuales son los medicamentos o insumos que más necesitas?</b></label>
+            <input
+              type="text"
+              placeholder="Introduzca los nombres"
+              formControlName="medicamentos"
+              class="form-control"
+              required
+            />
+            <div class="alert alert-danger" *ngIf="campoNoValido('medicamentos')">
+              <div >
+              El campo es requerido.
+              </div>
+              
+            </div>
+        </div>
+    
+
+         
+          <div class="row">
+            <div class="col-lg">
+              <button type="submit" class="signup-btn"  [disabled]="miFormulario.invalid">Registrarse</button>
+            </div>
+          </div>
+        </form>
+      </div>
+  
+      <div class="col-lg"></div>
+    </div>
+  </div>
+
