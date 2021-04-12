@@ -11,6 +11,7 @@ import { ValidatorService } from '../../forms/validators/services/validator.serv
 export class SuscripcionUsuariosPremiumComponent implements OnInit {
   paises = [];
 
+  codigoPaisSeleccionado: String;
 
   miFormulario:  FormGroup = this.fb.group({
     nombre: [ 'test6', [Validators.required]],
@@ -20,6 +21,8 @@ export class SuscripcionUsuariosPremiumComponent implements OnInit {
     medicamentos: [ '', [Validators.required]],
     email: ['test6@gmail.com', [ Validators.required, Validators.pattern( this.validatorService.emailPattern ) ] ],
     numero: ['123456', [ Validators.required, Validators.minLength(6) ]  ],
+    codigo: ['', [ Validators.required ]  ],
+
   });
 
   get emailErrorMsg(): string {
@@ -47,9 +50,14 @@ export class SuscripcionUsuariosPremiumComponent implements OnInit {
                private paisesService: PaisService) { }
 
   ngOnInit(): void {
+    console.log(this.codigoPaisSeleccionado);
+    
     this.listarPaises()
     this.miFormulario.value.pais= '';
+    this.miFormulario.value.codigo= 'Escoge un país';
+
   }
+
 
   listarPaises(){
     this.paisesService.ListadoPaises()
@@ -62,4 +70,25 @@ export class SuscripcionUsuariosPremiumComponent implements OnInit {
       
     })
   }
+
+  asignarValorCodigo(valueCode) {
+
+    this.codigoPaisSeleccionado = valueCode
+
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

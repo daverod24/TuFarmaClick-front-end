@@ -69,38 +69,71 @@
           </div>
          
           <!--Numero de contacto y país-->
+         
           <div class="row">
               <div class="col-6">
-                <label for="password"><b>Número de Whatsapp</b></label>
-                <input
-                  type="text"
-                  placeholder="Introduzca su número"
-                  formControlName="numero"
-                  class="form-control"
-                  required
-                />
-                <div class="alert alert-danger" *ngIf="campoNoValido('password')">
+                <label for="name"><b>Código</b></label>
+
+                <select
+                 class="form-select"
+                 aria-label="Default select example"
+                 formControlName="codigo"
+                 (change)="asignarValorCodigo($event.target.value)">
+                    <option  *ngFor="let pais of paises" [value]="pais.callingCodes">
+                     {{pais.name}}</option>
+                  </select>
+                <div class="alert alert-danger" *ngIf="campoNoValido('codigo')">
+                  <div>
+                    Seleccione un país para obtener el código.
+                  </div>
+                </div>
+      
+              </div>
+    
+          <!-- <div class="mt-5 col-2">
+
+             <span *ngIf="codigoPaisSeleccionado">
+                +
+             </span> 
+          {{codigoPaisSeleccionado}}
+          </div> -->
+
+              <div class="col-6">
+            <label for="name"><b>Número de Whatsapp</b></label>
+            
+        <input
+          type="text"
+          placeholder="Introduzca su nombre"
+          formControlName="numero"
+          class="form-control"
+          required
+          value=+{{codigoPaisSeleccionado}}-/>
+                <div class="alert alert-danger" *ngIf="campoNoValido('numero')">
                   <div>
                     Introduzca un número por favor
                   </div>
                 </div>
       
               </div>
-              <div class="col-6">
-                <label for="lastname"><b>En que país te encuentras:</b></label>
-                <select class="form-select" aria-label="Default select example" formControlName="pais">
-                  <option selected >Seleccione un país</option>
-                  <option  *ngFor="let pais of paises">{{pais.name}}</option>
-        
-                </select>
-      
-              </div>
-              <div class="alert alert-danger" *ngIf="campoNoValido('pais')">
-                <div >
-                  El campo es requerido.
-                </div>
-                
-              </div>
+              
+          </div>
+
+
+          <!--Pais-->
+          <div class="col-6">
+            <label for="lastname"><b>En que país te encuentras:</b></label>
+            <select class="form-select" aria-label="Default select example" formControlName="pais">
+              <option selected >Seleccione un país</option>
+              <option  *ngFor="let pais of paises">{{pais.name}}</option>
+    
+            </select>
+  
+          </div>
+          <div class="alert alert-danger" *ngIf="campoNoValido('pais')">
+            <div >
+              El campo es requerido.
+            </div>
+            
           </div>
 
            <!--Familiar-->
@@ -152,5 +185,8 @@
   
       <div class="col-lg"></div>
     </div>
+    <pre>{{miFormulario.valid }}</pre>
+    <pre>{{miFormulario.value | json }}</pre>
+
   </div>
 
