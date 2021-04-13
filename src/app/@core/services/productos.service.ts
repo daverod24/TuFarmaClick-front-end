@@ -76,4 +76,12 @@ export class ProductosService {
   }
 
 
+  subirCategoriaDesdeCsv(body: any) : Observable<any> {
+    const headers = new HttpHeaders()
+    .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+
+    return this.http.post<any>(`${this.baseUrl}uploadsDB/categorias`,body, {headers} )
+  }
+
+
 }
