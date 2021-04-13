@@ -1,29 +1,70 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-4">
-        <h1>Categorías:</h1>
+  <div class="row">
+    <div class="col-sm-4">
+      <h1>Categorías:</h1>
+    </div>
+
+  </div>
+
+      <div class="row">
+        <form [formGroup]="miFormulario"  class="col-5 mb-3">
+        <!-- Subir categoria uno por uno -->
+        <div >
+          <input
+            type="text"
+            formControlName="nombre"
+            class="form-control"
+            placeholder="Agregar Categoría"
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+          />
+        </div>
+        <div >
+          <button
+            class="btn btn-primary boton mt-2"
+            type="submit"
+            (click)="agregarCategoria()"
+            id="button-addon1"
+          >
+            Agregar Categorías
+          </button>
+        </div>
+    </form>
+
+
+    <form [formGroup]="miFormularioArchivo"   class="col-5 mb-3">
+
+
+        <!-- Input para subir archivo de categoria  -->
+        <div>
+          <input
+            type="file"
+            (change)="capturarFile($event)"
+            formControlName="archivo"
+            class="form-control"
+            aria-label="Example text with button addon"
+            aria-describedby="button-addon1"
+          />
+        </div>
+        <div >
+          <button
+            class="btn btn-primary boton mt-2"
+            type="submit"
+            (click)="insertarCategoriasDesdeCsv()"
+            id="button-addon1"
+          >
+            Subir archivos
+          </button>
+        </div>
+
+    </form>
+
       </div>
 
-<form [formGroup]="miFormulario" (ngSubmit)="agregarCategoria()">
-  <div class="row">
-       
-    <div class="col-4 mb-3 ">
-      <input type="text" formControlName="nombre" class="form-control" placeholder="Agregar Categoría" aria-label="Example text with button addon" aria-describedby="button-addon1">
-    </div>
-    <div class="col-4 ">
-      <button class="btn btn-primary boton" type="submit" (click)="agregarCategoria()" id="button-addon1">Agregar Categorías</button>
-    </div>
-  </div>
-</form>      
 
-  
-    </div>
-  
   <div class="table table-sm">
-  
     <table class="table table-hover">
       <thead>
-  
         <tr>
           <th scope="col">Id</th>
           <th scope="col">Categoría</th>
@@ -31,27 +72,29 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let categoria of categorias " >
-          <td>{{categoria._id}}</td>
-          <td>{{categoria.nombre}}</td>
-          
+        <tr *ngFor="let categoria of categorias">
+          <td>{{ categoria._id }}</td>
+          <td>{{ categoria.nombre }}</td>
+
           <td>
-              
-              <button type="button" (click)="deleteCategoria(categoria._id)" class="btn btn-danger btn-sm m-1"><i class="far fa-trash-alt icon"></i></button>
-              <button type="submit" [routerLink]="['editarCategoria', categoria._uid ]"  class="btn btn-info btn-sm"><i class="fas fa-user-edit icon"></i></button>
+            <button
+              type="button"
+              (click)="deleteCategoria(categoria._id)"
+              class="btn btn-danger btn-sm m-1"
+            >
+              <i class="far fa-trash-alt icon"></i>
+            </button>
+            <button
+              type="submit"
+              [routerLink]="['editarCategoria', categoria._uid]"
+              class="btn btn-info btn-sm"
+            >
+              <i class="fas fa-user-edit icon"></i>
+            </button>
           </td>
         </tr>
-      
-  
       </tbody>
     </table>
-  </div>   
-  
-    
   </div>
-  <div class="d-flex justify-content-center">
-   
-  </div>
-  
-  
-  
+</div>
+<div class="d-flex justify-content-center"></div>
