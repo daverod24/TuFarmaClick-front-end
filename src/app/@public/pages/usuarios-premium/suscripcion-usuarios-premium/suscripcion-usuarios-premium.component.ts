@@ -50,11 +50,9 @@ export class SuscripcionUsuariosPremiumComponent implements OnInit {
                private paisesService: PaisService) { }
 
   ngOnInit(): void {
-    console.log(this.codigoPaisSeleccionado);
     
     this.listarPaises()
     this.miFormulario.value.pais= '';
-    this.miFormulario.value.codigo= 'Escoge un país';
 
   }
 
@@ -62,7 +60,6 @@ export class SuscripcionUsuariosPremiumComponent implements OnInit {
   listarPaises(){
     this.paisesService.ListadoPaises()
     .subscribe( (paises) => {
-      console.log( paises );
       this.paises = paises;
       
     }, (err) => {

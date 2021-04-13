@@ -12,7 +12,8 @@ export class NavbarComponent implements OnInit {
   role: string;
   userLabel = '';
   nombre: string;
-
+  
+ 
   constructor(private auth: AuthService) {
     this.auth.accessVar$.subscribe((result) => {
       if (result === null) {
@@ -26,17 +27,20 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void {
 this.asignarVariablesNavBar();
 
   }
 
+  clase(){
 
+    const clase = document.querySelector('sticky-top');
+  }
 
   asignarVariablesNavBar ( ) {
 
     const usuario = JSON.parse(localStorage.getItem('usuario'));
-
     
     if (usuario) {
       this.role = usuario.rol;

@@ -1,5 +1,6 @@
-<nav class="navbar navbar-expand-lg  custom-bg sticky-top">
+<nav id="nav" class="navbar navbar-expand-lg  custom-bg sticky-top">
   <div class="container-fluid">
+    
     
     <button class="navbar-toggler boton" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
@@ -92,9 +93,7 @@
         </li>
         <li class="nav-item" *ngIf="userLabel">
           <a
-          class="nav-link"
-            
-            ><i class="fas fa-shopping-cart fa-cog"></i>
+          class="nav-link" [routerLink]="['/orders']"><i class="fas fa-shopping-cart fa-cog"></i>
             <span class="badge badge-success notification ">0</span></a
           >
         </li>

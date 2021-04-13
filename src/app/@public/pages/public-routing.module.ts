@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
       },
       {
+        path: 'orders',
+        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
+      },
+      {
         path: 'resetearpsw',
         loadChildren: () => import('./forms/resetear-psw/resetear-psw.module').then(m => m.ResetearPswModule)
       },
