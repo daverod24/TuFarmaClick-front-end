@@ -10,6 +10,8 @@ export interface Producto {
     categoria: Categoria;
     usuario:   Categoria;
     img?: string;
+    stock?: number;
+    //seleccionarCantidad?: number;
 }
 
 export interface Categoria {

@@ -38,8 +38,12 @@ export class CartService {
         //Comprobar que coincida el producto con alguno de la lista
         if ( producto._id === this.cart.products[i]._id){
            console.log('Producto existente');
-
-        }else {
+            // if (producto.stock === 0){
+            //   console.log('Borrar item Seleccionado');
+            //   //Quitar elemento
+            //   this.cart.products.splice(i, 1);
+            // }
+        }else {//Actualizar con la información
           this.cart.products[i]= producto;
         }
         actualizarOk = true;
