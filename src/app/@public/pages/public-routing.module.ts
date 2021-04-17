@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PublicComponent } from './public.component';
-import { LoginModule } from './forms/login/login.module';
-import { RegisterModule } from './forms/register/register.module';
+
 
 const routes: Routes = [
   {
@@ -36,10 +35,6 @@ const routes: Routes = [
       {
         path: 'blog',
         loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule)
-      },
-      {
-        path: 'orders',
-        loadChildren: () => import('./orders/orders.module').then(m => m.OrdersModule)
       },
       {
         path: 'resetearpsw',

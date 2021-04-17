@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResponse } from 'src/app/@core/interfaces/login.interface';
 import { AuthService } from 'src/app/@core/services/auth.service';
+import { CartService } from 'src/app/@core/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit {
   nombre: string;
   
  
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, private cartService: CartService ) {
     this.auth.accessVar$.subscribe((result) => {
       if (result === null) {
         this.userLabel = '';
@@ -60,5 +61,10 @@ this.asignarVariablesNavBar();
     this.auth.actualizarToken().subscribe(resp => {
       
     });
+  }
+
+  open(){
+    console.log('navbar open cart');
+    this.cartService.open();
   }
 }

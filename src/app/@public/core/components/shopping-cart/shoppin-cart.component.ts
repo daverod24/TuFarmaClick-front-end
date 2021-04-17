@@ -1,20 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/@core/services/cart.service';
+import { Icart } from './shoppin-cart.interface';
 
 @Component({
   selector: 'app-orders',
-  templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  templateUrl: './shoppin-cart.component.html',
+  styleUrls: ['./shoppin-cart.component.scss']
 })
-export class OrdersComponent implements OnInit {
+export class ShoppinCartComponent implements OnInit {
 
   productosAgregados: number = 0;
   total: number = 0;
   precio: number = 25;
+  cart: Icart;
 
   get getProductosAgregados() {
     return this.productosAgregados;
   }
 
+  constructor( private cartService: CartService) { }
+
+  ngOnInit(): void {
+   this.cart = this.cartService.initialize();
+   console.log('carrito', this.cart);
+  }
 
   sumaProductos( valor: number ){
     this.productosAgregados = this.productosAgregados + valor;
@@ -35,10 +44,8 @@ export class OrdersComponent implements OnInit {
   }
 
   
-
-  constructor() { }
-
-  ngOnInit(): void {
+  closeNav(){
+   this.cartService.close();
   }
 
 }

@@ -86,14 +86,14 @@
             class="dropdown-menu dropdown-menu-right"
             aria-labelledby="navbarDropdown">
             <a class="dropdown-item link" href="#">Perfil</a>
-            <a class="dropdown-item link" [routerLink]="['/orders']" routerLinkActive="router-link-active" >Pedidos</a>
+            <a class="dropdown-item link"  routerLinkActive="router-link-active" >Pedidos</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item link" (click)="logout()">Salir de la sesión</a>
         </ul>
         </li>
         <li class="nav-item" *ngIf="userLabel">
           <a
-          class="nav-link" [routerLink]="['/orders']"><i class="fas fa-shopping-cart fa-cog"></i>
+          class="nav-link" (click)="open()"><i class="fas fa-shopping-cart fa-cog"></i>
             <span class="badge badge-success notification ">0</span></a
           >
         </li>
