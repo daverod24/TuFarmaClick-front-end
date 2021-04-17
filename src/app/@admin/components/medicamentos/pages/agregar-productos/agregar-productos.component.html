@@ -30,7 +30,7 @@
           formControlName="categoria"
         >
           <option *ngFor="let categoria of categorias" [value]="categoria._id">
-            {{ categoria.nombre }}
+            {{ categoria.categoria }}
           </option>
         </select>
         <div class="alert alert-danger" *ngIf="campoNoValido('categoria')">

@@ -1,6 +1,4 @@
-
 <div class="container">
-
   <div class="container-fluid">
     <div class="row">
       <div class="col-sm-4">
@@ -8,37 +6,75 @@
         <hr />
         <br />
       </div>
-      <div class="col">
-        <button type="submit" [routerLink]="['nuevoProducto']"  class="btn btn-info btn-sm"> Nuevo medicamento</button>
-  
+      <div class="col-2">
+        <button
+          type="submit"
+          [routerLink]="['nuevoProducto']"
+          class="btn btn-info btn-sm"
+        >
+          Nuevo medicamento
+        </button>
       </div>
-  
-    </div>
+      <div class="col-2">
+        <button
+          type="submit"
+          (click)="cargarProductosSpreadsheets()"
+          class="btn btn-info btn-sm"
+        >
+          Cargar medicamentos desde excel
+        </button>
+      </div>
 
+      <div class="col-4">
+        <select
+          class="form-control"
+          (change)="filtrarPorRegion($event.target.value)"
+          name="region"
+        >
+          <option value="">Productos por region</option>
+          <option *ngFor="let region of regiones" [value]="region.region">
+            {{ region.region }}
+          </option>
+        </select>
+      </div>
 
-   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-    <div class="col" *ngFor="let medicamento of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
-      <div class="card mb-3" >
-        <img [src]="medicamento.img" class="card-img-top" alt="..." >
-        <div class="card-body">
-          <h5 class="card-title">{{medicamento.nombre}}</h5>
-          <p class="card-text">Precio: {{medicamento.precio}}</p>
-          <a class="btn btn-info btn-sm" [routerLink]="['editarProducto', medicamento._id]"><i class="far fa-edit icon"></i></a>
-          <a class="btn btn-danger m-2 btn-sm" (click)="deleteProdcuto(medicamento._id, medicamento.nombre)"><i class="far fa-trash-alt icon"></i></a>
-
+      <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+        <div
+          class="col"
+          *ngFor="
+            let medicamento of listadoProductos
+              | paginate: { itemsPerPage: 4, currentPage: page }
+          "
+        >
+          <div class="card mb-3">
+            <img [src]="medicamento.img" class="card-img-top" alt="..." />
+            <div class="card-body">
+              <h5 class="card-title">{{ medicamento.nombre }}</h5>
+              <p class="card-text">Precio: {{ medicamento.precio }}</p>
+              <a
+                class="btn btn-info btn-sm"
+                [routerLink]="['editarProducto', medicamento._id]"
+                ><i class="far fa-edit icon"></i
+              ></a>
+              <a
+                class="btn btn-danger m-2 btn-sm"
+                (click)="deleteProdcuto(medicamento._id, medicamento.nombre)"
+                ><i class="far fa-trash-alt icon"></i
+              ></a>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="d-flex justify-content-center">
+        <pagination-controls
+          (pageChange)="page = $event"
+          autoHide="true"
+          responsive="true"
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+        ></pagination-controls>
+      </div>
     </div>
-
   </div>
-
-   <div class="d-flex justify-content-center">
-    <pagination-controls (pageChange)="page = $event" autoHide="true"
-    responsive="true"
-    previousLabel="Anterior"
-    nextLabel="Siguiente"></pagination-controls>
-  </div>
-  
-
 </div>
-

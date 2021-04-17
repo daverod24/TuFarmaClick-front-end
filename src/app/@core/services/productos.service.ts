@@ -17,6 +17,31 @@ export class ProductosService {
      ) { }
 
 
+     cargarProductosSpreadsheets (): Observable<any>  {
+
+      const headers = new HttpHeaders()
+      .set('x-token', JSON.parse( localStorage.getItem('token'))|| '' );
+  
+      return this.http.post<any>(`${this.baseUrl}productos/spreedSheeds`,{}, {headers} )
+
+     }
+
+
+     getProducotsPorRegion(region : string): Observable<any>  {
+
+
+      console.log(region);
+
+      return this.http.get<any>( `${this.baseUrl}productos/filtrar/region/${region}` )
+
+     }
+
+
+
+     getRegiones ( ): Observable<any> {
+      return this.http.get<any>( `${this.baseUrl}regiones` )
+    }
+
 
   getMedicamentos ( ): Observable<RespuestaGetProductos> {
 
