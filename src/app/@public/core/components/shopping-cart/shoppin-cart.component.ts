@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/@core/services/cart.service';
-import { Icart } from './shoppin-cart.interface';
+import { CarritoDeCompras } from './shoppin-cart.interface';
 
 @Component({
   selector: 'app-orders',
@@ -12,7 +12,7 @@ export class ShoppinCartComponent implements OnInit {
   productosAgregados: number = 0;
   total: number = 0;
   precio: number = 25;
-  cart: Icart;
+  cart: CarritoDeCompras;
 
   get getProductosAgregados() {
     return this.productosAgregados;
@@ -22,7 +22,7 @@ export class ShoppinCartComponent implements OnInit {
 
   ngOnInit(): void {
    this.cart = this.cartService.initialize();
-   console.log('carrito', this.cart);
+   //console.log('carrito', this.cart);
   }
 
   sumaProductos( valor: number ){

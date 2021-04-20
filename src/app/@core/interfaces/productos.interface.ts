@@ -8,11 +8,15 @@ export interface Producto {
     _id:       string;
     nombre:    string;
     categoria: Categoria;
-    usuario:   Categoria;
+    usuario?:   Categoria;
     img?: string;
     stock?: number;
+    productosAgregados? : number;
+    precioTotalPorProducto?: number;
+
     //seleccionarCantidad?: number;
 }
+
 
 export interface Categoria {
     _id:    string;

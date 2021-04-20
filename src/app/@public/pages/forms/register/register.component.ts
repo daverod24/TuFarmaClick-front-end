@@ -59,12 +59,15 @@ export class RegisterComponent implements OnInit {
     const { nombre, apellido, email, password } = this.miFormulario.value;
 
     this.authService.registro( nombre, apellido, email, password)
-      .subscribe( ok => {
+      .subscribe( usuarioRegistrado => {
+        console.log(usuarioRegistrado)
 
-        if ( ok === true ) {
-          this.router.navigateByUrl('/');
+        if ( usuarioRegistrado ) {
+          this.router.navigateByUrl('/login');
+          Swal.fire('Usuario registrado con exíto, por favor inicie sesión', '', 'success');
+
         } else {
-          Swal.fire('Error', ok, 'error');
+          Swal.fire('Error al registra el usuario', '', 'error');
         }
       });
 

@@ -13,7 +13,9 @@ export class MedicamentosComponent implements OnInit {
   listadoProductos: Producto[];
   page: number= 1;
 
-  constructor( private productosService: ProductosService, private cartService: CartService) { }
+  constructor( 
+    private productosService: ProductosService,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
 
@@ -21,8 +23,12 @@ export class MedicamentosComponent implements OnInit {
   }
 
   agregarProductos(producto: Producto){
-    console.log('agregar')
-    this.cartService.gestionarProductos(producto);
+
+    this.cartService.guardarProducto(producto);
+
+
+    //console.log('agregar')
+   // this.cartService.gestionarProductos(producto);
     // localStorage.setItem('producto',JSON.stringify( producto));
 
   }

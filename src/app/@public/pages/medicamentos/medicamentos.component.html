@@ -11,13 +11,13 @@
       
 
       <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
-        <div class="col" *ngFor="let medicamentos of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
+        <div class="col" *ngFor="let medicamento of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
             <div class="card mb-3"  >
-                <img [src]="medicamentos.img" class="card-img-top" alt="...">
+                <img [src]="medicamento.img" class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">{{medicamentos.nombre}}</h5>
-                  <p class="card-text">Precio: {{medicamentos.precio}}</p>
-                  <a (click)="agregarProductos(medicamentos)" class="btn btn-primary">Agregar</a>
+                  <h5 class="card-title">{{medicamento.nombre}}</h5>
+                  <p class="card-text">Precio: {{medicamento.precio}}</p>
+                  <a (click)="agregarProductos(medicamento)" class="btn btn-primary">Agregar</a>
                 </div>
               </div>
          </div>
