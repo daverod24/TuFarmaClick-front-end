@@ -10,6 +10,11 @@
       </nav>
       
 
+
+      <button (click)="reiniciarCarrito()">Reiniciar carrito</button>
+
+      {{carrito | json}}
+
       <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
         <div class="col" *ngFor="let medicamento of listadoProductos | paginate: {itemsPerPage:4 , currentPage: page}">
             <div class="card mb-3"  >
@@ -18,6 +23,7 @@
                   <h5 class="card-title">{{medicamento.nombre}}</h5>
                   <p class="card-text">Precio: {{medicamento.precio}}</p>
                   <a (click)="agregarProductos(medicamento)" class="btn btn-primary">Agregar</a>
+                  <a (click)="eliminarProducto(medicamento)" class="btn btn-danger">Eliminar</a>
                 </div>
               </div>
          </div>
