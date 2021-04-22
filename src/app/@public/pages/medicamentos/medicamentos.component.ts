@@ -12,6 +12,7 @@ export class MedicamentosComponent implements OnInit {
 
   listadoProductos: Producto[];
   page: number= 1;
+  carrito;
 
   constructor( 
     private productosService: ProductosService,
@@ -20,18 +21,37 @@ export class MedicamentosComponent implements OnInit {
   ngOnInit(): void {
 
     this.listarProductos();
+
+
+    this.carrito = this.cartService.getCarrito();
+
   }
 
   agregarProductos(producto: Producto){
 
     this.cartService.guardarProducto(producto);
 
-
-    //console.log('agregar')
-   // this.cartService.gestionarProductos(producto);
-    // localStorage.setItem('producto',JSON.stringify( producto));
+    this.carrito = this.cartService.getCarrito();
 
   }
+  eliminarProducto(producto: Producto){
+
+    this.cartService.eliminarProducto(producto);
+
+    this.carrito = this.cartService.getCarrito();
+
+  }
+
+  reiniciarCarrito() {
+    this.cartService.reiniciarCarrito();
+    this.carrito = this.cartService.getCarrito();
+
+  }
+
+
+
+
+
 
 
   listarProductos() {

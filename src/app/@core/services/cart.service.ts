@@ -1,83 +1,161 @@
+import { CarritoDeCompras } from './../../@public/core/components/shopping-cart/shoppin-cart.interface';
 import { Injectable } from '@angular/core';
-import { CarritoDeCompras } from 'src/app/@public/core/components/shopping-cart/shoppin-cart.interface';
 import { Producto } from '../interfaces/productos.interface';
+import { async } from '@angular/core/testing';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-
-
   productos: Array<Producto> = [];
 
-  
-  carritoDeCompras: CarritoDeCompras ={
+  carritoDeCompras: CarritoDeCompras = {
     total: 0,
     subtotal: 0,
-    productos: this.productos, 
-    totalProductosAgregados: 0
+    productos: this.productos,
+    totalProductosAgregados: 0,
   };
 
-  constructor() { }
 
 
-  
 
+
+  constructor() {}
 
 
   /**
-   * SE encarga de guardar el producto en el carrito
+   * 
+   * VEr el carrrito
    */
-  guardarProducto(producto: Producto) {
-
-
-    this.iniciarCarritoDeCompras();
-
-    this.carritoDeCompras.productos.forEach((producto, indice) => {
-
-      if(producto._id === producto._id) {
-    console.log("Existe");
-
-
-          this.carritoDeCompras.productos[indice].productosAgregados +=  1;
-          this.carritoDeCompras.productos.splice(indice, 1);
-
-           localStorage.setItem('carrito', JSON.stringify( this.carritoDeCompras));
-
-        // if(producto.productosAgregados) {
-
-        //   this.carritoDeCompras.productos[indice].productosAgregados = 2;
-        //   this.carritoDeCompras.productos.splice(indice, 1);
-
-        //   localStorage.setItem('carrito', JSON.stringify( this.carritoDeCompras));
-        //   return;
-        // } else if(producto.productosAgregados > 1) {
-
-        //   this.carritoDeCompras.productos[indice].productosAgregados +=  1;
-        //   this.carritoDeCompras.productos.splice(indice, 1);
-
-        //   localStorage.setItem('carrito', JSON.stringify( this.carritoDeCompras));
-        //   return;
-
-        // }
-      } 
-
-    });
-
-
-    console.log("No existe");
-
-    producto.productosAgregados = 1;
-
-    this.carritoDeCompras.productos.push(producto);
-
-    localStorage.setItem('carrito', JSON.stringify( this.carritoDeCompras));
-
+  async getCarrito() {
+    return this.carritoDeCompras;
   }
 
 
 
+  /**
+   * 
+   * Reiniciar carrito
+   */
+  async reiniciarCarrito() {
 
+    this.carritoDeCompras =  {
+      total: 0,
+      subtotal: 0,
+      productos: [],
+      totalProductosAgregados: 0,
+    };
+
+
+
+    localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+
+
+  }
+
+
+  /**
+   * Se encarga de guardar el producto en el carrito
+   */
+  async guardarProducto(productoAgregado: Producto) {
+    let actializarProducto: Boolean = false;
+    let sumaTotal: number = 0;
+    let totalProductosAgregados: number = 0;
+
+
+    this.iniciarCarritoDeCompras();
+
+    await this.carritoDeCompras.productos.forEach(async (producto, indice) => {
+      if (producto._id == productoAgregado._id) {
+        actializarProducto = true;
+        this.carritoDeCompras.productos[indice].productosAgregados += 1;
+        this.carritoDeCompras.productos[indice].precioTotalPorProducto =
+          this.carritoDeCompras.productos[indice].productosAgregados *
+          this.carritoDeCompras.productos[indice].precio;
+        // localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+      }
+    });
+
+    if (!actializarProducto) {
+
+      productoAgregado.productosAgregados = 1;
+
+
+      productoAgregado.precioTotalPorProducto =
+        productoAgregado.precio * productoAgregado.productosAgregados;
+      this.carritoDeCompras.productos.push(productoAgregado);
+      localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+    } 
+
+
+
+      await this.carritoDeCompras.productos.forEach((producto) => {
+        sumaTotal += producto.precioTotalPorProducto;
+        totalProductosAgregados += producto.productosAgregados
+      });
+
+      
+      this.carritoDeCompras.total = sumaTotal;
+      this.carritoDeCompras.totalProductosAgregados = totalProductosAgregados;
+      localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+
+  }
+
+  /**
+   * Elimina un producto del carrito
+   */
+  async eliminarProducto(productoEliminado: Producto) {
+
+    let actializarProducto: Boolean = false;
+    let sumaTotal: number = 0;
+    let totalProductosAgregados: number = 0;
+
+
+    this.iniciarCarritoDeCompras();
+
+    await this.carritoDeCompras.productos.forEach(async (producto, indice) => {
+      if (producto._id == productoEliminado._id  && producto.productosAgregados > 0) {
+
+
+        actializarProducto = true;
+        this.carritoDeCompras.productos[indice].productosAgregados -= 1;
+        this.carritoDeCompras.productos[indice].precioTotalPorProducto =
+          this.carritoDeCompras.productos[indice].productosAgregados *
+          this.carritoDeCompras.productos[indice].precio;
+        // localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+      }
+
+
+      if(producto.productosAgregados === 0) {
+        this.carritoDeCompras.productos.splice(indice, 1);
+      }
+    });
+
+    // if (!actializarProducto) {
+    //   productoEliminado.productosAgregados = 1;
+    //   productoEliminado.precioTotalPorProducto =
+    //     productoEliminado.precio * productoEliminado.productosAgregados;
+    //   this.carritoDeCompras.productos.push(productoEliminado);
+    //   localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+    // } 
+
+
+
+
+
+      await this.carritoDeCompras.productos.forEach((producto) => {
+        sumaTotal += producto.precioTotalPorProducto;
+        totalProductosAgregados += producto.productosAgregados
+      });
+
+      
+      this.carritoDeCompras.total = sumaTotal;
+      this.carritoDeCompras.totalProductosAgregados = totalProductosAgregados;
+      localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
+
+
+
+  }
 
 
 
@@ -85,91 +163,35 @@ export class CartService {
    * Metodo que se encarga de crear un carrito de compras vacio y guardarlo en el local storage
    */
   iniciarCarritoDeCompras() {
-
     const carritoStorage = JSON.parse(localStorage.getItem('carrito'));
 
-    if(carritoStorage) {
-
+    if (carritoStorage) {
       this.carritoDeCompras = carritoStorage;
 
       return;
     }
 
-    localStorage.setItem('carrito', JSON.stringify( this.carritoDeCompras));
-
+    localStorage.setItem('carrito', JSON.stringify(this.carritoDeCompras));
   }
 
+  initialize() {
+    const productoStore = JSON.parse(localStorage.getItem('carritoDeCompras'));
+    if (productoStore !== null) {
+      this.carritoDeCompras = productoStore;
+    }
+    return this.carritoDeCompras;
+  }
 
-
-
-   initialize(){
-      const productoStore = JSON.parse(localStorage.getItem('carritoDeCompras'));
-      if (productoStore !== null ) {
-        this.carritoDeCompras = productoStore;
-      }
-      return this.carritoDeCompras;
-   }
-
-
-   /*
-   Función que agrega en un array los productos que se agreguen en el carrito
-   y....  
-   */
-  //  gestionarProductos(producto: Producto){
-
-  //   const cantidadDeProductosEnCarrito = this.carritoDeCompras.productos.length;
-    
-  //   if (cantidadDeProductosEnCarrito === 0) {
-
-  //     this.agregarProductoAlCarrito(producto);
-
-  //   }else {
-
-  //     let actualizarOk = false;
-
-  //     // this.carritoDeCompras.products.forEach( (producto, indice) => {
-
-  //     // });
-
-  //     for (let i = 0; i < cantidadDeProductosEnCarrito; i++){
-
-  //       //Comprobar que coincida el producto con alguno de la lista
-  //       if ( producto._id === this.carritoDeCompras.productos[i]._id){
-  //         //  console.log('Producto existente');
-  //         //   if (producto.seleccionarCantidad === 0){
-  //         //     console.log('Borrar item Seleccionado');
-  //         //     //Quitar elemento
-  //         //     this.carritoDeCompras.products.splice(i, 1);
-  //           // }
-  //       }else {//Actualizar con la información
-  //         this.carritoDeCompras.productos[i]= producto;
-  //       }
-  //       actualizarOk = true;
-  //       i = cantidadDeProductosEnCarrito;
-  //     }
-  //     if (!actualizarOk){
-  //     this.agregarProductoAlCarrito(producto);
-
-  //     }
-  //   }
-  //   localStorage.setItem('carritoDeCompras', JSON.stringify(this.carritoDeCompras));
-  //  }
-
-
-  //  agregarProductoAlCarrito(producto: Producto) {
-  //   this.carritoDeCompras.productos.push(producto);
-  //  }
+ 
 
   open() {
     document.getElementById('mySidenav').style.width = '600px';
     document.getElementById('overlay').style.display = 'block';
     document.getElementById('app').style.overflow = 'hidden';
-
   }
-  close(){
-    document.getElementById('mySidenav').style.width = "0";
+  close() {
+    document.getElementById('mySidenav').style.width = '0';
     document.getElementById('overlay').style.display = 'none';
     document.getElementById('app').style.overflow = 'auto';
   }
-
 }
