@@ -42,8 +42,6 @@ export class ShoppinCartComponent implements OnInit {
    
 
   }
-
-  
   closeNav(){
    this.cartService.close();
   }
