@@ -10,15 +10,16 @@
                     <a class="btn"><i class="fas fa-arrow-left icon"></i> Seguir comprando</a>
                 </div>
               </div>
-              <div class="card">
+              <div class="card " >
                 <div class="card-body">
                 
-                    <div class="row">
+                    <div class="row" *ngFor="let producto of productos">
                         <div class="col-md-3 col-sm-6">
-                        <img class="w-25" src="../assets/imagenes/home/med.jpeg" alt="Producto Seleccionado">
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                          <p class="card-text">Paracetamol Precio: 25$</p>
+                        <!-- <img class="w-25" src="../assets/imagenes/home/med.jpeg" alt="Producto Seleccionado"> -->
+                     {{carritoDeCompras}}
+                      </div>
+                        <div class="col-md-3 col-sm-6" >
+                          <p class="card-text">{{producto.nombre}} Precio: 25$</p>
                         
                           </div>
                         <div class="col-md-4 col-sm-6">

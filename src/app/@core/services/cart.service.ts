@@ -16,10 +16,6 @@ export class CartService {
     totalProductosAgregados: 0,
   };
 
-
-
-
-
   constructor() {}
 
 
@@ -30,8 +26,6 @@ export class CartService {
   async getCarrito() {
     return this.carritoDeCompras;
   }
-
-
 
   /**
    * 
@@ -61,7 +55,6 @@ export class CartService {
     let actializarProducto: Boolean = false;
     let sumaTotal: number = 0;
     let totalProductosAgregados: number = 0;
-
 
     this.iniciarCarritoDeCompras();
 

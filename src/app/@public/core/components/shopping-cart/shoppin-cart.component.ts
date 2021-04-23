@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Producto } from 'src/app/@core/interfaces/productos.interface';
 import { CartService } from 'src/app/@core/services/cart.service';
 import { CarritoDeCompras } from './shoppin-cart.interface';
 
@@ -13,6 +14,15 @@ export class ShoppinCartComponent implements OnInit {
   total: number = 0;
   precio: number = 25;
   cart: CarritoDeCompras;
+  carrito;
+  productos: Array<Producto> = [];
+
+  carritoDeCompras: CarritoDeCompras = {
+    total: 0,
+    subtotal: 0,
+    productos: this.productos,
+    totalProductosAgregados: 0,
+  };
 
   get getProductosAgregados() {
     return this.productosAgregados;
@@ -22,8 +32,20 @@ export class ShoppinCartComponent implements OnInit {
 
   ngOnInit(): void {
    this.cart = this.cartService.initialize();
-   //console.log('carrito', this.cart);
+    this.carritoDeCompras;
+    this.cartService.getCarrito().then ((productos) => {
+      this.carritoDeCompras = productos;
+    })
   }
+
+   agregar(){
+    // const carritoStorage = JSON.parse(localStorage.getItem('carrito'));
+    // this.carritoDeCompras = carritoStorage;
+    // console.log(this.carritoDeCompras);
+    this.cartService.getCarrito().then ((productos) => {
+      this.carritoDeCompras = productos;
+    })
+   }
 
   sumaProductos( valor: number ){
     this.productosAgregados = this.productosAgregados + valor;
@@ -42,6 +64,17 @@ export class ShoppinCartComponent implements OnInit {
    
 
   }
+ 
+ 
+
+  eliminarProducto(producto: Producto){
+
+    this.cartService.eliminarProducto(producto);
+
+    this.carrito = this.cartService.getCarrito();
+
+  }
+  
   closeNav(){
    this.cartService.close();
   }
