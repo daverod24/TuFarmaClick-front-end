@@ -4,39 +4,41 @@
     <div class="row">
         <div class="col-md-12 col-sm-6 mb-2">
             <div class="card">
-                <h3 class="card-header">Mi carrito</h3> 
-                
+                <h3 class="card-header">Mi carrito</h3>
+
                 <div class="card-body">
                     <a class="btn"><i class="fas fa-arrow-left icon"></i> Seguir comprando</a>
                 </div>
               </div>
+
+              
               <div class="card " >
                 <div class="card-body">
-                
+
                     <div class="row" *ngFor="let producto of productos">
                         <div class="col-md-3 col-sm-6">
                         <!-- <img class="w-25" src="../assets/imagenes/home/med.jpeg" alt="Producto Seleccionado"> -->
-                     {{carritoDeCompras}}
+
                       </div>
                         <div class="col-md-3 col-sm-6" >
-                          <p class="card-text">{{producto.nombre}} Precio: 25$</p>
-                        
+                          <p class="card-text">{{producto.nombre}} Precio: {{producto.precio}}$</p>
+
                           </div>
                         <div class="col-md-4 col-sm-6">
-                          <button type="submit" class="btn btn-light" (click)="sumaProductos(1)"><i class="fas fa-plus icon"></i></button>
-                          <span class="badge rounded-pill bg-info text-dark mx-2" > {{getProductosAgregados}} </span>
-                          <button type="submit" class="btn btn-light" (click)="restaProductos(1)"><i class="far fa-window-minimize icon"></i></button>
+                          <button type="submit" class="btn btn-light" ><i class="fas fa-plus icon"></i></button>
+                          <span class="badge rounded-pill bg-info text-dark mx-2" >  </span>
+                          <button type="submit" class="btn btn-light" ><i class="far fa-window-minimize icon"></i></button>
                         </div>
                         <div class="col-md-2 col-sm-6">
-                          <p class="card-text">25 $</p>
+                          <p class="card-text">{{producto.precioTotalPorProducto}} $</p>
 
                       </div>
                     </div>
-                 
+
                 </div>
               </div>
         </div>
-    
+
         <div class="col-md-12 col-sm-">
             <div class="card">
                 <h5 class="card-header">Resumen de mi orden</h5>
@@ -59,12 +61,11 @@
                 </div>
               </div>
         </div>
-       
+
     </div>
-   
+
   </div>
 
 
 </div>
 <div id="overlay"></div>
-

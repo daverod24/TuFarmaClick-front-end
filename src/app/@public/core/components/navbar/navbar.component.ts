@@ -51,6 +51,9 @@ this.asignarVariablesNavBar();
 
   }
 
+
+  
+
   logout() {
     this.auth.logout();
     this.userLabel = undefined;
